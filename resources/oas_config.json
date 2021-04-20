@@ -1,0 +1,15 @@
+{
+    "dbfile_path": "./resources/db/OAS.db",
+    "sqlmapper_path": "./resources/db/oas_sql.xml",
+
+    "ui_main_path": "./resources/gui/oas_ui_main.ui",
+    "ui_list_path": "./resources/gui/oas_ui_list.ui",
+    "ui_header_path": "./resources/gui/oas_ui_header.ui",
+    "ui_paths_path": "./resources/gui/oas_ui_paths.ui",
+    "ui_schemas_path": "./resources/gui/oas_ui_schemas.ui",
+
+    "export_type": "redoc",
+
+    "redoc_template": "./resources/templates/redoc.html.template",
+    "swagger_template": "./resources/templates/swagger.html.template"
+}

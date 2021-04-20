@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>974</width>
+    <height>752</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="lbl_paths_pathList">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>41</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Paths</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tbl_pathList">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>40</y>
+     <width>951</width>
+     <height>180</height>
+    </rect>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="columnCount">
+    <number>8</number>
+   </property>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+  </widget>
+  <widget class="QPushButton" name="btn_addNewPath">
+   <property name="geometry">
+    <rect>
+     <x>918</x>
+     <y>16</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Add new path (INS)</string>
+   </property>
+   <property name="statusTip">
+    <string>Add new path (INSERT)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>images/addnew.png</normalon>
+    </iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_removePath">
+   <property name="geometry">
+    <rect>
+     <x>940</x>
+     <y>16</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Remove selected path</string>
+   </property>
+   <property name="statusTip">
+    <string>Remove selected path</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>images/remove.png</normalon>
+    </iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_addNewPathResponse">
+   <property name="geometry">
+    <rect>
+     <x>918</x>
+     <y>463</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Add new response for selected path (INS)</string>
+   </property>
+   <property name="statusTip">
+    <string>Add new response for selected path (INSERT)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>images/addnew.png</normalon>
+    </iconset>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tbl_pathResponseList">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>487</y>
+     <width>951</width>
+     <height>180</height>
+    </rect>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="columnCount">
+    <number>4</number>
+   </property>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+  </widget>
+  <widget class="QLabel" name="lbl_paths3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>458</y>
+     <width>351</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Responses for Path</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_removePathResponse">
+   <property name="geometry">
+    <rect>
+     <x>940</x>
+     <y>463</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Remove selected response</string>
+   </property>
+   <property name="statusTip">
+    <string>Remove selected response</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>images/remove.png</normalon>
+    </iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_removePathHeader">
+   <property name="geometry">
+    <rect>
+     <x>940</x>
+     <y>239</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Remove selected response</string>
+   </property>
+   <property name="statusTip">
+    <string>Remove selected header</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>images/remove.png</normalon>
+    </iconset>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tbl_pathHeaderList">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>263</y>
+     <width>951</width>
+     <height>180</height>
+    </rect>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="columnCount">
+    <number>4</number>
+   </property>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+  </widget>
+  <widget class="QLabel" name="lbl_paths2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>234</y>
+     <width>351</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Headers for Path</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_addNewPathHeader">
+   <property name="geometry">
+    <rect>
+     <x>918</x>
+     <y>239</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Add new response for selected path (INS)</string>
+   </property>
+   <property name="statusTip">
+    <string>Add new header for selected path (INSERT)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>images/addnew.png</normalon>
+    </iconset>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

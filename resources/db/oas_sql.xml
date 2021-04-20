@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OAS">
+
+    <!-- select OAS list -->
+    <select id="selectHeaderList" resultType="map">
+        SELECT HD.*
+          FROM OAS_HEADER HD
+         WHERE 1 = 1
+        <if test="UID != None and UID != ''">
+           AND HD.UID = #{UID}
+        </if>
+        
+        ORDER BY HD.UID
+    </select>
+
+    <!-- select server list for specified OAS -->
+    <select id="selectServerList" resultType="map">
+        SELECT SV.*
+          FROM OAS_SERVER SV
+         WHERE 1 = 1
+           AND SV.UID = #{UID}
+
+        ORDER BY SV.UID
+               , SV.SEQ
+    </select>
+
+    <!-- select tag list for specified OAS -->
+    <select id="selectTagList" resultType="map">
+        SELECT TG.*
+          FROM OAS_TAG TG
+         WHERE 1 = 1
+           AND TG.UID = #{UID}
+
+        ORDER BY TG.UID
+               , TG.TAG_SEQ
+    </select>
+
+    <!-- select path list for specified OAS -->
+    <select id="selectPathList" resultType="map">
+        SELECT PT.*
+          FROM OAS_PATH PT
+         WHERE 1 = 1
+           AND PT.UID = #{UID}
+
+        ORDER BY PT.UID
+               , PT.PATH_SEQ
+    </select>
+
+    <!-- select paths' header list for specified OAS -->
+    <select id="selectPathHeaderList" resultType="map">
+        SELECT PH.*
+          FROM OAS_PATH_HEADER PH
+         WHERE 1 = 1
+           AND PH.UID = #{UID}
+        <if test="PATH_SEQ != None and PATH_SEQ != ''">
+           AND PH.PATH_SEQ = #{PATH_SEQ}
+        </if>
+
+        ORDER BY PH.UID
+               , PH.PATH_SEQ
+               , PH.HEADER_SEQ
+    </select>
+
+    <!-- select paths' response list for specified OAS -->
+    <select id="selectPathResponseList" resultType="map">
+        SELECT PR.*
+          FROM OAS_PATH_RESPONSE PR
+         WHERE 1 = 1
+           AND PR.UID = #{UID}
+        <if test="PATH_SEQ != None and PATH_SEQ != ''">
+           AND PR.PATH_SEQ = #{PATH_SEQ}
+        </if>
+
+        ORDER BY PR.UID
+               , PR.PATH_SEQ
+               , PR.STATUS_CD
+    </select>
+
+    <!-- select schema list for specified OAS -->
+    <select id="selectSchemaList" resultType="map">
+        SELECT SC.*
+          FROM OAS_SCHEMA SC
+         WHERE 1 = 1
+           AND SC.UID = #{UID}
+
+        ORDER BY SC.UID
+               , SC.SCHEMA_SEQ
+    </select>
+
+    <!-- select schemas' property list for specified OAS -->
+    <select id="selectSchemaPropList" resultType="map">
+        SELECT SP.*
+          FROM OAS_SCHEMA_PROP SP
+         WHERE 1 = 1
+           AND SP.UID = #{UID}
+        <if test="SCHEMA_SEQ != None and SCHEMA_SEQ != ''">
+           AND SP.SCHEMA_SEQ = #{SCHEMA_SEQ}
+        </if>
+
+        ORDER BY SP.UID
+               , SP.SCHEMA_SEQ
+               , SP.PROP_SEQ
+    </select>
+
+
+    <!-- insert new OAS header information -->
+    <insert id="insertHeader">
+        INSERT INTO OAS_HEADER (
+              UID
+            , TITLE
+            , VERSION
+            , DESCRIPTION
+            , TERMS_OF_SERVICE
+            , CONTACT_NAME
+            , CONTACT_EMAIL
+            , EXT_DOCS_URL
+            , EXT_DOCS_DESC
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , #{TITLE}
+            , #{VERSION}
+            , #{DESCRIPTION}
+            , #{TERMS_OF_SERVICE}
+            , #{CONTACT_NAME}
+            , #{CONTACT_EMAIL}
+            , #{EXT_DOCS_URL}
+            , #{EXT_DOCS_DESC}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- update OAS header information -->
+    <update id="updateHeader">
+        UPDATE OAS_HEADER
+           SET TITLE = #{TITLE}
+             , VERSION = #{VERSION}
+             , DESCRIPTION = #{DESCRIPTION}
+             , TERMS_OF_SERVICE = #{TERMS_OF_SERVICE}
+             , CONTACT_NAME = #{CONTACT_NAME}
+             , CONTACT_EMAIL = #{CONTACT_EMAIL}
+             , EXT_DOCS_URL = #{EXT_DOCS_URL}
+             , EXT_DOCS_DESC = #{EXT_DOCS_DESC}
+             , LAST_MOD = DATETIME('NOW')
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </update>
+
+    <!-- delete OAS header information -->
+    <delete id="deleteHeader">
+        DELETE OAS_HEADER
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+
+    <!-- insert new server information -->
+    <insert id="insertServer">
+        INSERT INTO OAS_SERVER (
+              UID
+            , SEQ
+            , URL
+            , DESCRIPTION
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , (SELECT IFNULL(MAX(SEQ), 0) + 1
+                 FROM OAS_SERVER
+                WHERE 1 = 1
+                  AND UID = #{UID})
+            , #{URL}
+            , #{DESCRIPTION}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- delete server information -->
+    <delete id="deleteServer">
+        DELETE
+          FROM OAS_SERVER
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+
+    <!-- insert new tag information -->
+    <insert id="insertTag">
+        INSERT INTO OAS_TAG (
+              UID
+            , TAG_SEQ
+            , NAME
+            , DESCRIPTION
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , (SELECT IFNULL(MAX(TAG_SEQ), 0) + 1
+                 FROM OAS_TAG
+                WHERE 1 = 1
+                  AND UID = #{UID})
+            , #{NAME}
+            , #{DESCRIPTION}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- delete tag information -->
+    <delete id="deleteTag">
+        DELETE
+          FROM OAS_TAG
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+
+    <!-- insert new path information -->
+    <insert id="insertPath">
+        INSERT INTO OAS_PATH (
+              UID
+            , PATH_SEQ
+            , PATH
+            , METHOD
+            , TAG_SEQ
+            , OPERATION_ID
+            , SUMMARY
+            , DESCRIPTION
+            , REQUEST_BODY_CONTENT_TYPE
+            , REQUEST_BODY_SCHEMA_SEQ
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , (SELECT IFNULL(MAX(PATH_SEQ), 0) + 1
+                 FROM OAS_PATH
+                WHERE 1 = 1
+                  AND UID = #{UID})
+            , #{PATH}
+            , #{METHOD}
+            , #{TAG_SEQ}
+            , #{OPERATION_ID}
+            , #{SUMMARY}
+            , #{DESCRIPTION}
+            , #{REQUEST_BODY_CONTENT_TYPE}
+            , #{REQUEST_BODY_SCHEMA_SEQ}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- delete path information -->
+    <delete id="deletePath">
+        DELETE 
+          FROM OAS_PATH
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+    <!-- insert new path header information -->
+    <insert id="insertPathHeader">
+        INSERT INTO OAS_PATH_HEADER (
+              UID
+            , PATH_SEQ
+            , HEADER_SEQ
+            , NAME
+            , TYPE
+            , REQUIRED
+            , DESCRIPTION
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , #{PATH_SEQ}
+            , (SELECT IFNULL(MAX(HEADER_SEQ), 0) + 1
+                 FROM OAS_PATH_HEADER
+                WHERE 1 = 1
+                  AND UID = #{UID}
+                  AND PATH_SEQ = #{PATH_SEQ})
+            , #{NAME}
+            , #{TYPE}
+            , CASE WHEN UPPER(#{REQUIRED}) = 'Y' OR UPPER(#{REQUIRED}) = '1' THEN 'Y' ELSE 'N' END
+            , #{DESCRIPTION}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- delete path header information -->
+    <delete id="deletePathHeader">
+        DELETE 
+          FROM OAS_PATH_HEADER
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+
+    <!-- insert new path response information -->
+    <insert id="insertPathResponse">
+        INSERT INTO OAS_PATH_RESPONSE (
+              UID
+            , PATH_SEQ
+            , STATUS_CD
+            , CONTENT_TYPE
+            , DESCRIPTION
+            , SCHEMA_SEQ
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , #{PATH_SEQ}
+            , #{STATUS_CD}
+            , #{CONTENT_TYPE}
+            , #{DESCRIPTION}
+            , #{SCHEMA_SEQ}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- delete path response information -->
+    <delete id="deletePathResponse">
+        DELETE 
+          FROM OAS_PATH_RESPONSE
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+
+    <!-- insert new schema information -->
+    <insert id="insertSchema">
+        INSERT INTO OAS_SCHEMA (
+              UID
+            , SCHEMA_SEQ
+            , NAME
+            , TYPE
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , #{SCHEMA_SEQ}
+            , #{NAME}
+            , #{TYPE}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- delete schema information -->
+    <delete id="deleteSchema">
+        DELETE 
+          FROM OAS_SCHEMA
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+
+    <!-- insert new schema's property information -->
+    <insert id="insertSchemaProp">
+        INSERT INTO OAS_SCHEMA_PROP (
+              UID
+            , SCHEMA_SEQ
+            , PROP_SEQ
+            , NAME
+            , TYPE
+            , VALUE
+            , REF_SCHEMA_SEQ
+            , MAX_LENGTH
+            , DESCRIPTION
+            , REQUIRED
+            , REG_DTTM
+            , LAST_MOD
+        ) VALUES (
+              #{UID}
+            , #{SCHEMA_SEQ}
+            , (SELECT IFNULL(MAX(PROP_SEQ), 0) + 1
+                 FROM OAS_SCHEMA_PROP
+                WHERE 1 = 1
+                  AND UID = #{UID}
+                  AND SCHEMA_SEQ = #{SCHEMA_SEQ})
+            , #{NAME}
+            , #{TYPE}
+            , #{VALUE}
+            , #{REF_SCHEMA_SEQ}
+            , #{MAX_LENGTH}
+            , #{DESCRIPTION}
+            , #{REQUIRED}
+            , DATETIME('NOW')
+            , DATETIME('NOW')
+        )
+    </insert>
+
+    <!-- delete schema's property information -->
+    <delete id="deleteSchemaProp">
+        DELETE 
+          FROM OAS_SCHEMA_PROP
+         WHERE 1 = 1
+           AND UID = #{UID}
+    </delete>
+
+</mapper>

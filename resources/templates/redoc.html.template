@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>#{TITLE}</title>
+    <!-- needed for mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <redoc spec-url="#{DATAFILE}"></redoc>
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+    -->
+    <script src="https://unpkg.com/redoc@latest/bundles/redoc.standalone.js"></script>
+</body>
+</html>
