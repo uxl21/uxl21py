@@ -19,7 +19,7 @@ from PyQt5.QtWidgets import *
 class ListUtil:
 
     """
-        Filter list items with its property name and value.
+        Filters list items with its property name and value.
 
         @author uxl21
     """
@@ -29,7 +29,7 @@ class ListUtil:
 
 
     """
-        Return max value among array's item with its property name.
+        Returns the greatest value among array's item with its property name.
     """
     @staticmethod
     def getMax(list:List, prop:Any) -> Any:
@@ -50,6 +50,12 @@ class ListUtil:
 """
 class DataUtil:
 
+    """
+        Returns true if the value is null or empty string, zero-length array,
+        false otherwise.
+
+        @author uxl21
+    """
     @staticmethod
     def isEmpty(value:Any, trim:bool=False) -> bool:
         # None check
@@ -70,11 +76,23 @@ class DataUtil:
         return False
 
     
+    """
+        Returns true if the value is not null and has value,
+        false otherwise.
+
+        @author uxl21
+    """
     @staticmethod
     def isNotEmpty(value:Any) -> bool:
         return not DataUtil.isEmpty(value)
 
 
+    """
+        Returns true if the one of the arguments is empty(DataUtil.isEmpty(value) is true),
+        false otherwise.
+
+        @author uxl21
+    """
     @staticmethod
     def isAnyEmpty(*args) -> bool:
         for argValue in args:
@@ -84,6 +102,12 @@ class DataUtil:
         return False
 
 
+    """
+        Returns the default value if the value is empty(DataUtil.isEmpty(value) is true),
+        original value otherwise.
+
+        @author uxl21
+    """
     @staticmethod
     def nvl(value:Any, defaultValue:Any) -> Any:
         if DataUtil.isEmpty(value):
@@ -92,16 +116,30 @@ class DataUtil:
             return value
 
 
-    @staticmethod
-    def nvl(value:Any, defaultValue:Any) -> Any:
-        return defaultValue if value == None else value
+    """
+        Returns 'trueValue' if the given condition is True, 'falseValue' otherwise.
 
-
+        @author uxl21
+    """
     @staticmethod
     def ifelse(condition:bool, trueValue:Any, falseValue:Any) -> Any:
         return trueValue if condition else falseValue
 
 
+    """
+        'decode()' function just like Oracle DECODE()
+
+
+        foo = "foo"
+
+        value = DataUtil.decode(foo, "foo", "F", "X")
+        print(value)    # => "F"
+
+        value = DataUtil.decode(foo, "Xoo", "X", "foo", "F", "Zoo", "Z")
+        print(value)    # => "F"
+
+        @author uxl21
+    """
     @staticmethod
     def decode(value, *args) -> Any:
         length = len(args)
@@ -128,6 +166,10 @@ class DataUtil:
         return decodedValue
 
 
+    """
+        Returns boolean value from the given value.
+        If value is empty, returns 'default'.
+    """
     @staticmethod
     def toBoolean(value:Any, default:bool=False) -> bool:
         if DataUtil.isEmpty(value):
@@ -143,9 +185,11 @@ class DataUtil:
 
 
 
-#
-# Utility class for dictionary data
-#
+"""
+    Utility class for dictionary data
+
+    @author uxl21
+"""
 class DictUtil:
 
     @staticmethod
