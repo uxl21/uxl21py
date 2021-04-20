@@ -32,9 +32,9 @@ from uxl21py import *
 
 
 
-#
-# This classNAME constants for OAS application
-#
+"""
+    This class defines constants for OAS application
+"""
 class OASConstants():
     SCHEMA_SEQ_KEY_PREFIX ="SCHEMA_SEQ_"
     PATH_SEQ_KEY_PREFIX = "PATH_SEQ_"

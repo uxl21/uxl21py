@@ -1,31 +1,36 @@
-#
-# Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
-# 
-# This file is part of uxl21
-#
-# @author: uxl21
-#
+"""
+    Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
+    This file is part of uxl21
+
+    @author uxl21
+"""
 
 import json
 
-from abc import abstractmethod
 from typing import Any, List, Tuple
 from PyQt5.QtWidgets import *
 
 
-#
-# Utility class for List
-#
+"""
+    Utility class for List
+
+    @author uxl21
+"""
 class ListUtil:
 
     """
-        filter list
+        Filter list items with its property name and value.
+
+        @author uxl21
     """
     @staticmethod
     def filterList(list:List, prop:str, filterValue:Any) -> List:
         return [item for item in list if item[prop] != filterValue]
 
 
+    """
+        Return max value among array's item with its property name.
+    """
     @staticmethod
     def getMax(list:List, prop:Any) -> Any:
         values = [item[prop] for item in list]
