@@ -6,25 +6,53 @@
 """
 
 import json
+import numpy
+import time
 
 from typing import Any, List, Tuple
 from PyQt5.QtWidgets import *
 
 
-"""
-    Utility class for List
 
-    @author uxl21
-"""
 class ListUtil:
-
     """
-        Filters list items with its property name and value.
+        Utility class for List
 
         @author uxl21
     """
+
     @staticmethod
     def filterList(list:List, prop:str, filterValue:Any) -> List:
+        """
+            Filters list items with its property name and value.
+
+            Parameters
+            ----------
+            list: List
+                Original data list
+            prop: str
+                property name of the item to filter
+            filterValue: Any
+                property value of the item to filter
+
+            Returns
+            -------
+            List
+                Contains filtered items
+
+            Notes
+            -----
+            
+
+            Examples
+            -----
+
+            Author
+            -----
+            
+            uxl21
+        """
+        numpy.array
         return [item for item in list if item[prop] != filterValue]
 
 
@@ -282,16 +310,70 @@ class QWidgetUtil:
 
 
 
-if __name__ == "__main__":
-    dataObj = {
-        "key1": "value1",
-        "key2": "value2",
-        "key3": "value3",
-        "key4": "value4",
-        "key5": "value5",
-        "key6": "value6",
-        "key7": "value7",
-        "key8": "value8"
-    }
 
-    print( json.dumps(dataObj) )
+class DatetimeUtil:
+
+    class PyStopWatch:
+
+        def __init__(self, label:str="DEFAULT") -> None:
+            self.__label = label
+            self.__startTimeMs = 0
+            self.__stopTimeMs = 0
+            self.__lapTimes = []
+
+
+        def start(self) -> None:
+            self.__startTimeMs = int(time.time() * 1000)
+
+
+        def lap(self) -> None:
+            self.__lapTimes.append(int(time.time() * 1000))
+
+
+        def stop(self) -> None:
+            self.__stopTimeMs = int(time.time() * 1000)
+
+
+        def elapsed(self) -> int:
+            return self.__stopTimeMs - self.__startTimeMs
+
+
+        def lapCount(self) -> int:
+            return len(self.__lapTimes)
+
+
+        def lapTime(self, index:int) -> int:
+            if index >= len(self.__lapTimes):
+                return -1
+
+            return self.__lapTimes[index] - self.__startTimeMs
+
+
+        def getLabel(self) -> str:
+            return self.__label
+
+
+        def reset(self) -> None:
+            self.__startTimeMs = 0
+            self.__stopTimeMs = 0
+            self.__lapTimes.clear()
+
+
+
+
+if __name__ == "__main__":
+    stopWatch = DatetimeUtil.PyStopWatch()
+    stopWatch.start()
+
+    data = numpy.loadtxt("./ratings.dat", delimiter="::", dtype=numpy.int64)
+    stopWatch.lap()
+
+    data = numpy.loadtxt("./ratings.dat", delimiter="::", dtype=numpy.int64)
+    stopWatch.lap()
+
+    data = numpy.loadtxt("./ratings.dat", delimiter="::", dtype=numpy.int64)
+    stopWatch.lap()
+
+    for i in range(stopWatch.lapCount()):
+        print("[" + str(i) + "]: " + str(stopWatch.lapTime(i)))
+    
