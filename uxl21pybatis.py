@@ -265,7 +265,7 @@ class OracleClientSession(PySQLClientSession):
 
     def __init__(self, sqlMapper:PySQLMapper) -> None:
         self.__sqlMapper = sqlMapper
-        self.__connection = None
+        self.__connection = None        
 
 
     #

@@ -1,6 +1,6 @@
 """
     Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
-    This file is part of uxl21
+    This file is part of uxl21py
 
     
     Author
@@ -8,12 +8,9 @@
     uxl21
 """
 
-import json
 import numpy
-import pandas
 import time
 
-# from typing import Any, List, Tuple
 from PyQt5.QtWidgets import *
 from pandas.core.frame import DataFrame
 from pandas.core.series import Series
@@ -36,24 +33,40 @@ class ListUtil:
             Filters list items with their property name and value.
 
             Parameters
-            ----------
-            list: List
+            -------
+            list: list
                 Original data list
             prop: str
-                property name of the item to filter
+                Property name of the item to filter
             filterValue: Any
-                property value of the item to filter
+                Property's value of the item to filter
 
             Returns
             -------
-            List
+            list
                 Contains filtered items
 
             Examples
-            -----
+            -------
+            list = [
+                { "code": "A01", "type": "api" },\n
+                { "code": "B11", "type": "pos" },\n
+                { "code": "B12", "type": "pos" },\n
+                { "code": "C07", "type": "backoffice" },\n
+                { "code": "D08", "type": "api" },\n
+                { "code": "S21", "type": "backoffice" }\n
+            ]\n
+            filteredList = ListUtil.filterList(list, "type", "api")\n
+            print(filteredList)\n
+            ```
+            [
+                { "code": "A01", "type": "api" },
+                { "code": "D08", "type": "api" }
+            ]
+            ```
 
             Author
-            -----
+            -------
             uxl21
         """
         numpy.array
@@ -64,12 +77,25 @@ class ListUtil:
     def getMax(list:list, prop:any) -> any:
         """
             Returns the greatest value among array's item with its property name.
+
+            Parameters
+            -------
+            list: list
+                List to calculate max value
+            prop: any
+                Item's property name
+
+            Returns
+            -------
+            any
+                The maximum value
+
+            Author
+            -------
+            uxl21
         """
 
         values = [item[prop] for item in list]
-
-        #for item in list:
-        #    values.append(item[prop])
 
         if len(values) > 0:
             return max(values)
@@ -81,7 +107,6 @@ class ListUtil:
 class DataUtil:
     """
         Utility class for general data process
-
         
         Author
         -----
@@ -94,6 +119,7 @@ class DataUtil:
             Returns true if the value is null or empty string, zero-length array,
             false otherwise.
 
+            
             
             Author
             -----
