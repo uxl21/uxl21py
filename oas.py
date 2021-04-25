@@ -25,8 +25,8 @@ from PyQt5 import QtCore, uic
 from PyQt5.QtGui import QKeyEvent
 from PyQt5.QtWidgets import *
 
-from pybatis import PybatisSQLMapper, SQLite3ClientSession
-from uxl21py import *
+from uxl21pybatis import PybatisSQLMapper, SQLite3ClientSession
+from uxl21pyutil import *
 
 
 
