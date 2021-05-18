@@ -50,10 +50,15 @@ class OASConstants():
 
 
 
-#
-# configuration class
-#
+
 class OASConfig():
+    """
+        The configuration class
+
+        Author
+        -------
+        uxl21
+    """
 
     def __new__(cls, *args, **kwargs) -> Any:
         if not hasattr(cls, "_instance"):
