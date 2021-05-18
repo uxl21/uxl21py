@@ -10,6 +10,7 @@
 
 import numpy
 import time
+import json
 
 from PyQt5.QtWidgets import *
 from pandas.core.frame import DataFrame
@@ -119,7 +120,6 @@ class DataUtil:
             Returns true if the value is null or empty string, zero-length array,
             false otherwise.
 
-            
             
             Author
             -----
@@ -612,7 +612,7 @@ class PandasUtil:
     """
 
     @staticmethod
-    def tooDict(series:Series) -> dict:
+    def toDict(series:Series) -> dict:
         """
             Converts the row data as pandas Series to dictionary
 
@@ -687,7 +687,77 @@ class PandasUtil:
 
 
 
+
+class JSONUtil:
+    """
+        Utility class to process JSON data
+
+    
+        Author
+        --------
+        uxl21
+    """
+
+    @staticmethod
+    def toJSONString(data:any, beautify:bool=False) -> str:
+        """
+            Converts data object to JSON string
+
+
+            Parameters
+            --------
+            data: data object to convert
+            beautify: whether to beautify result JSON string for pretty print
+
+            Author
+            --------
+            uxl21
+        """
+
+        return json.dumps(data)
+
+
+    @staticmethod
+    def toDict(jsonStr:str) -> dict:
+        """
+            Converts JSON string to dictionary data
+
+
+            Parameters
+            --------
+            jsonStr: JSON string to convert
+
+            Author
+            --------
+            uxl21
+        """
+
+        return json.loads(jsonStr)
+
+
+    @staticmethod
+    def beautify(jsonStr:str) -> str:
+        """
+            Beautifies JSON string
+            
+
+            Parameters
+            --------
+            jsonStr: JSON string to beautify
+
+            Author
+            --------
+            uxl21
+        """
+
+        return json.dumps(json.loads(jsonStr), indent=4)
+
+
+
+
+
 if __name__ == "__main__":
+    """
     stopWatch = DatetimeUtil.StopWatch()
     stopWatch.start()
 
@@ -702,3 +772,40 @@ if __name__ == "__main__":
 
     for i in range(stopWatch.lapCount()):
         print("[" + str(i) + "]: " + str(stopWatch.lapTime(i)))
+    """
+
+    data = {
+        "1.FirstName": "Gildong",
+        "2.LastName": "Hong",
+        "3.Age": 20, 
+        "4.University": "UOS",
+        "5.Courses": [
+            {
+                "Major": "Statistics", 
+                "Classes": ["Probability", 
+                            "Generalized Linear Model", 
+                            "Categorical Data Analysis"]
+            }, 
+            {
+                "Minor": "ComputerScience", 
+                "Classes": ["Data Structure", 
+                            "Programming", 
+                            "Algorithms"]
+            }
+        ]
+    }
+
+
+    jsonStr = JSONUtil.toJSONString(data)
+    print( jsonStr )
+    print()
+
+    beautified = JSONUtil.beautify(jsonStr)
+    print( beautified )
+    print()
+
+    print( JSONUtil.toDict(beautified) )
+
+
+
+
