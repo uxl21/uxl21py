@@ -22,7 +22,6 @@ class ListUtil:
     """
         Utility class for list(array).
 
-        
         Author
         -----
         uxl21
