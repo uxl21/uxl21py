@@ -1,6 +1,6 @@
 """
     Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
-    This file is part of uxl21py
+    This file is a part of uxl21py
 
     
     Author
