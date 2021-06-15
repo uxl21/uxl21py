@@ -16,9 +16,11 @@ class QRCodeImageGenerator:
         -----
         uxl21
     """
-    pass
+    
+    def __init__(self) -> None:
+        print("QR Code Image Genrator")
 
 
 
 if __name__ == "__main__":
-    pass
+    generator:QRCodeImageGenerator = QRCodeImageGenerator()
