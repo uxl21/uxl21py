@@ -48,22 +48,22 @@ class ListUtil:
 
             Examples
             -------
-            list = [
-                { "code": "A01", "type": "api" },\n
-                { "code": "B11", "type": "pos" },\n
-                { "code": "B12", "type": "pos" },\n
-                { "code": "C07", "type": "backoffice" },\n
-                { "code": "D08", "type": "api" },\n
-                { "code": "S21", "type": "backoffice" }\n
-            ]\n
-            filteredList = ListUtil.filterList(list, "type", "api")\n
-            print(filteredList)\n
-            ```
-            [
-                { "code": "A01", "type": "api" },
-                { "code": "D08", "type": "api" }
-            ]
-            ```
+            >>> list = [
+            >>>    { "code": "A01", "type": "api" },
+            >>>    { "code": "B11", "type": "pos" },
+            >>>    { "code": "B12", "type": "pos" },
+            >>>    { "code": "C07", "type": "backoffice" },
+            >>>    { "code": "D08", "type": "api" },
+            >>>    { "code": "S21", "type": "backoffice" }
+            >>> ]
+            >>> filteredList = ListUtil.filterList(list, "type", "api")
+            >>> print(filteredList)
+            >>> ```
+            >>> [
+            >>>     { "code": "A01", "type": "api" },
+            >>>     { "code": "D08", "type": "api" }
+            >>> ]
+            >>> ```
 
             Author
             -------
@@ -118,7 +118,6 @@ class DataUtil:
         """
             Returns true if the value is null or empty string, zero-length array,
             false otherwise.
-
             
             Author
             -----
@@ -148,7 +147,6 @@ class DataUtil:
         """
             Returns true if the value is not null and has value,
             false otherwise.
-
             
             Author
             -----
@@ -163,7 +161,6 @@ class DataUtil:
         """
             Returns true if the one of the arguments is empty(DataUtil.isEmpty(value) is true),
             false otherwise.
-
             
             Author
             -----
@@ -182,7 +179,6 @@ class DataUtil:
         """
             Returns the default value if the value is empty(DataUtil.isEmpty(value) is true),
             original value otherwise.
-
             
             Author
             -----
@@ -199,7 +195,6 @@ class DataUtil:
     def ifelse(condition:bool, trueValue:any, falseValue:any) -> any:
         """
             Returns 'trueValue' if the given condition is True, 'falseValue' otherwise.
-
             
             Author
             -----
@@ -214,18 +209,19 @@ class DataUtil:
         """
             'decode()' function just like Oracle DECODE()
 
+            Examples:
+            -------
+            >>> foo = "foo"
 
-            foo = "foo"
+            >>> value = DataUtil.decode(foo, "foo", "F", "X")
+            >>> print(value)    # => "F"
 
-            value = DataUtil.decode(foo, "foo", "F", "X")
-            print(value)    # => "F"
-
-            value = DataUtil.decode(foo, "Xoo", "X", "foo", "F", "Zoo", "Z")
-            print(value)    # => "F"
+            >>> value = DataUtil.decode(foo, "Xoo", "X", "foo", "F", "Zoo", "Z")
+            >>> print(value)    # => "F"
 
             
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -261,7 +257,7 @@ class DataUtil:
 
             
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -284,7 +280,7 @@ class DictUtil:
 
         
         Author
-        -----
+        -------
         uxl21
     """
 
@@ -296,7 +292,7 @@ class DictUtil:
 
             
             Author
-            -----
+            -------
             uxl21
         """
         
@@ -311,7 +307,7 @@ class DictUtil:
 
             
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -326,7 +322,7 @@ class DictUtil:
 
             
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -348,7 +344,7 @@ class DictUtil:
 
             
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -369,9 +365,8 @@ class DictUtil:
         """
             Returns the value of the dictionary for the specified key as string type.
 
-            
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -379,6 +374,22 @@ class DictUtil:
             return default
         else:
             return str(data.get(key))
+
+
+    @staticmethod
+    def getInteger(data:dict, key:str, default:int=0) -> int:
+        """
+        Returns the value of the dictionary for the specified key as integer type.
+
+        Author
+        -------
+        uxl21
+        """
+
+        if DictUtil.isEmpty(data, key):
+            return default
+        else:
+            return data.get(key)
 
 
 
@@ -402,9 +413,9 @@ class QWidgetUtil:
 
             Example
             -------
-            combobox = QWidgetUtil.createComboBox(
-                ["post", "get", "put"], initValue=s"post", currentTextChangedHandler=self.currentTextChangedHandler
-            )
+            >>> combobox = QWidgetUtil.createComboBox(
+            >>>     ["post", "get", "put"], initValue=s"post", currentTextChangedHandler=self.currentTextChangedHandler
+            >>> )
 
             
             Author
@@ -440,8 +451,8 @@ class QWidgetUtil:
             
             Example
             -------
-            progressDialog = QWidgetUtil.createProgressDialog(title="PLZ wait", label="In progress...", maximum=80)
-            progressDialog.show()
+            >>> progressDialog = QWidgetUtil.createProgressDialog(title="PLZ wait", label="In progress...", maximum=80)
+            >>> progressDialog.show()
 
             
             Author
@@ -464,20 +475,18 @@ class QWidgetUtil:
 class DatetimeUtil:
     """
         Utility class for datetime process
-
         
         Author
-        -----
+        -------
         uxl21
     """
 
     class StopWatch:
         """
             The StopWatch class including lap time function.
-
             
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -491,10 +500,9 @@ class DatetimeUtil:
         def start(self) -> None:
             """
                 Starts to run timer.
-
                 
             Author
-            -----
+            -------
             uxl21
             """
 
@@ -504,10 +512,9 @@ class DatetimeUtil:
         def lap(self) -> None:
             """
                 Marks the lap time.
-
                 
             Author
-            -----
+            -------
             uxl21
             """
 
@@ -517,10 +524,9 @@ class DatetimeUtil:
         def stop(self) -> None:
             """
                 Stops the timer/
-
                 
             Author
-            -----
+            -------
             uxl21
             """
 
@@ -530,7 +536,6 @@ class DatetimeUtil:
         def elapsed(self) -> int:
             """
                 Returns the total elapsed time as milliseconds.
-
                 
             Author
             -----
@@ -543,10 +548,9 @@ class DatetimeUtil:
         def lapCount(self) -> int:
             """
                 Returns the count of the marked lap time.
-
                 
             Author
-            -----
+            -------
             uxl21
             """
 
@@ -556,10 +560,9 @@ class DatetimeUtil:
         def lapTime(self, index:int) -> int:
             """
                 Returns the lap time for the specified order(index).
-
                 
             Author
-            -----
+            -------
             uxl21
             """
 
@@ -572,10 +575,9 @@ class DatetimeUtil:
         def getLabel(self) -> str:
             """
                 Returns the label.
-
                 
             Author
-            -----
+            -------
             uxl21
             """
 
@@ -585,10 +587,9 @@ class DatetimeUtil:
         def reset(self) -> None:
             """
                 Resets all lap times and elapsed time to zero.
-
                 
             Author
-            -----
+            -------
             uxl21
             """
 
@@ -603,10 +604,9 @@ class DatetimeUtil:
 class PandasUtil:
     """
         Utility class to process pandas data
-
     
         Author
-        -----
+        -------
         uxl21
     """
 
@@ -621,23 +621,22 @@ class PandasUtil:
 
             Examples
             --------
-            data = [
-                ["a", 2, 7],
-                ["b", 5, 8],
-                ["c", 7, 8]
-            ]
-            df = pd.DataFrame(data=data, columns=["COL1", "COL2", "COL3"])
+            >>> data = [
+            >>>     ["a", 2, 7],
+            >>>     ["b", 5, 8],
+            >>>     ["c", 7, 8]
+            >>> ]
+            >>> df = pd.DataFrame(data=data, columns=["COL1", "COL2", "COL3"])
 
-            for rowIndex in range(len(df)):
-                print( PandasUtil.toDict(df.iloc[rowIndex]) )
+            >>> for rowIndex in range(len(df)):
+            >>>     print( PandasUtil.toDict(df.iloc[rowIndex]) )
 
-            `{'COL1': 'a', 'COL2': 2, 'COL3': 7}`
-            `{'COL1': 'b', 'COL2': 5, 'COL3': 8}`
-            `{'COL1': 'c', 'COL2': 7, 'COL3': 8}`
-
+            >>> `{'COL1': 'a', 'COL2': 2, 'COL3': 7}`
+            >>> `{'COL1': 'b', 'COL2': 5, 'COL3': 8}`
+            >>> `{'COL1': 'c', 'COL2': 7, 'COL3': 8}`
             
             Author
-            -----
+            -------
             uxl21
         """
 
@@ -659,17 +658,16 @@ class PandasUtil:
 
             Examples
             --------
-            data = [
-                ["a", 2, 7],
-                ["b", 5, 8],
-                ["c", 7, 8]
-            ]
+            >>> data = [
+            >>>     ["a", 2, 7],
+            >>>     ["b", 5, 8],
+            >>>     ["c", 7, 8]
+            >>> ]
 
-            df = pd.DataFrame(data=data, columns=["COL1", "COL2", "COL3"])
+            >>> df = pd.DataFrame(data=data, columns=["COL1", "COL2", "COL3"])
 
-            print( PandasUtil.toDictArray(df) )
-            `[{'COL1': 'a', 'COL2': 2, 'COL3': 7}, {'COL1': 'b', 'COL2': 5, 'COL3': 8}, {'COL1': 'c', 'COL2': 7, 'COL3': 8}]`
-
+            >>> print( PandasUtil.toDictArray(df) )
+            >>> `[{'COL1': 'a', 'COL2': 2, 'COL3': 7}, {'COL1': 'b', 'COL2': 5, 'COL3': 8}, {'COL1': 'c', 'COL2': 7, 'COL3': 8}]`
             
             Author
             -----
@@ -689,8 +687,7 @@ class PandasUtil:
 
 class JSONUtil:
     """
-        Utility class to process JSON data
-
+        Utility class to process JSON data.
     
         Author
         --------
@@ -700,13 +697,14 @@ class JSONUtil:
     @staticmethod
     def toJSONString(data:any, beautify:bool=False) -> str:
         """
-            Converts data object to JSON string
-
+            Converts data object to JSON string.
 
             Parameters
             --------
-            data: data object to convert
-            beautify: whether to beautify result JSON string for pretty print
+            data: any
+                data object to convert
+            beautify: bool
+                whether to beautify result JSON string for pretty print
 
             Author
             --------
@@ -719,12 +717,12 @@ class JSONUtil:
     @staticmethod
     def toDict(jsonStr:str) -> dict:
         """
-            Converts JSON string to dictionary data
-
+            Converts JSON string to dictionary data.
 
             Parameters
             --------
-            jsonStr: JSON string to convert
+            jsonStr: str
+                JSON string to convert
 
             Author
             --------
@@ -742,7 +740,8 @@ class JSONUtil:
 
             Parameters
             --------
-            jsonStr: JSON string to beautify
+            jsonStr: str
+                JSON string to beautify
 
             Author
             --------
