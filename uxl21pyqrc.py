@@ -8,31 +8,24 @@
     uxl21
 """
 from base64 import encode
-from sys import version
+from sys import setcheckinterval, version
 
 from qrcode import constants
 from uxl21pyutil import DataUtil, DictUtil
-import qrcode
 import pyqrcode
 from qrcode.main import QRCode
 
 
 class QRCodeImageConstants:
+    """
+        This class defines constants for QR code image commonly.
+        Some constants are for QRCodeImageGenerator class and the others are for SimplePyQRCodeGenerator.
 
+        Author
+        -------
+        uxl21
     """
-        Default version of the QR code.
-    """
-    DEFAULT_VERSION = 1
 
-    """
-        Default box size of the QR code.
-    """
-    DEFAULT_BOX_SIZE = 10
-
-    """
-        Default border of the QR code.
-    """
-    DEFAULT_BORDER = 4
 
     """
         Default fill colour of the QR code.
@@ -44,16 +37,50 @@ class QRCodeImageConstants:
     """
     DEFAULT_BACKGROUND_COLOUR = "#ffffff"
 
-    ERROR_CORRECT_H = constants.ERROR_CORRECT_H
-    ERROR_CORRECT_L = constants.ERROR_CORRECT_L
-    ERROR_CORRECT_M = constants.ERROR_CORRECT_M
-    ERROR_CORRECT_Q = constants.ERROR_CORRECT_Q
+
+    # for QRCodeImageGenerator class
+    """
+        Default version of the QR code.
+    """
+    QRCODE_DEFAULT_VERSION = 1
+
+    """
+        Default box size of the QR code.
+    """
+    QRCODE_DEFAULT_BOX_SIZE = 10
+
+    """
+        Default border of the QR code.
+    """
+    QRCODE_DEFAULT_BORDER = 4
+
+    QRCODE_ERROR_CORRECT_H = constants.ERROR_CORRECT_H
+    QRCODE_ERROR_CORRECT_Q = constants.ERROR_CORRECT_Q
+    QRCODE_ERROR_CORRECT_M = constants.ERROR_CORRECT_M
+    QRCODE_ERROR_CORRECT_L = constants.ERROR_CORRECT_L
 
 
-    QRCODE_IMAGE_TYPE_PNG = "png"
-    QRCODE_IMAGE_TYPE_SVG = "svg"
-    QRCODE_IMAGE_TYPE_EPS = "eps"
-    QRCODE_IMAGE_TYPE_XBM = "xbm"
+    # for SimplePyQRCodeGenerator class
+    """
+        Default version of the QR code.
+    """
+    PYQRCODE_DEFAULT_VERSION = 10
+
+    PYQRCODE_ERROR_CORRECT_H = "H"
+    PYQRCODE_ERROR_CORRECT_Q = "Q"
+    PYQRCODE_ERROR_CORRECT_M = "M"
+    PYQRCODE_ERROR_CORRECT_L = "L"
+
+    PYQRCODE_IMAGE_TYPE_PNG = "png"
+    PYQRCODE_IMAGE_TYPE_SVG = "svg"
+    PYQRCODE_IMAGE_TYPE_EPS = "eps"
+    PYQRCODE_IMAGE_TYPE_XBM = "xbm"
+
+    """
+        Default scale value for the QR code image created by SimplePyQRCodeImageGenerator class.
+    """
+    PYQRCODE_DEFAULT_SCALE = 2
+
 
 
 
@@ -74,12 +101,12 @@ class QRCodeImageGenerator:
             Parameters
             -------
             kargs: dict
-                - version: QR code version between 1 and 40. Default is QRCodeImageConstants.DEFAULT_VERSION(1)
+                - version: QR code version between 1 and 40. Default is QRCodeImageConstants.QRCODE_DEFAULT_VERSION(1)
                 - errorCorrection: Error correction
-                    - QRCodeImageConstants.ERROR_CORRECT_H
-                    - QRCodeImageConstants.ERROR_CORRECT_L
-                    - QRCodeImageConstants.ERROR_CORRECT_M
-                    - QRCodeImageConstants.ERROR_CORRECT_Q
+                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_H
+                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_Q
+                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_M
+                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_L
                 - boxSize: Box size. Default is QRCodeImageConstants.DEFAULT_BOX_SIZE(10)
                 - border: Border size. Default is QRCodeImageConstants.DEFAULT_BORDER(4)
 
@@ -87,11 +114,12 @@ class QRCodeImageGenerator:
             -------
             uxl21
         """
-
-        self.version = DictUtil.getInteger(kargs, "version", QRCodeImageConstants.DEFAULT_VERSION)
-        self.errorCorrection = DictUtil.getInteger(kargs, "errorCorrection", QRCodeImageConstants.ERROR_CORRECT_M)
-        self.boxSize = DictUtil.getInteger(kargs, "boxSize", QRCodeImageConstants.DEFAULT_BOX_SIZE)
-        self.border = DictUtil.getInteger(kargs, "border", QRCodeImageConstants.DEFAULT_BORDER)
+        
+        self.version = DictUtil.getInteger(kargs, "version", QRCodeImageConstants.QRCODE_DEFAULT_VERSION)
+        self.errorCorrection = DictUtil.getInteger(kargs, "errorCorrection", QRCodeImageConstants.QRCODE_ERROR_CORRECT_M)
+        self.boxSize = DictUtil.getInteger(kargs, "boxSize", QRCodeImageConstants.QRCODE_DEFAULT_BOX_SIZE)
+        self.border = DictUtil.getInteger(kargs, "border", QRCodeImageConstants.QRCODE_DEFAULT_BORDER)
+        print("--->> ", self.version, self.errorCorrection, self.boxSize, self.border)
 
         self.fillColour = QRCodeImageConstants.DEFAULT_FILL_COLOUR
         self.backgroundColour = QRCodeImageConstants.DEFAULT_BACKGROUND_COLOUR
@@ -107,7 +135,7 @@ class QRCodeImageGenerator:
             Parameters
             -------
             kargs: dict
-                the dictionary data containing 'fillColour' and 'backgroundColour'
+                the dictionary data containing 'fillColour' and 'backgroundColour' attributes.
 
             Author
             -------
@@ -175,24 +203,65 @@ class QRCodeImageGenerator:
 
 
 class SimplePyQRCodeGenerator:
+    """
+        This class generates QR code image with string data simply.
+
+        Author
+        -------
+        uxl21
+    """
 
     @staticmethod
-    def generate(qrCodeData:any, path:str, type:str="png", **kargs) -> None:
+    def generate(qrCodeData, path:str, **kargs) -> None:
+        """
+            Generates QR code image with string data and some configurations.
+
+            Parameters
+            -------
+            qrCodeData: str
+                string data
+            path: str
+                Absolute path including file name and extension.
+            type: str
+                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_PNG (Default)
+                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_SVG
+                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_EPS
+                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_XBM
+            kargs: dict
+                - version: QR code version between 1 and 40. Default is QRCodeImageConstants.PYQRCODE_DEFAULT_VERSION(10)
+                - encoding: encoding of the string data. Default is utf-8.
+                - scale: QR code image's scale. Default is QRCodeImageConstants.PYQRCODE_DEFAULT_SCALE(2).
+                - errorCorrection: Error correction
+                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_H
+                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_Q
+                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_M (Default)
+                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_L
+
+            Author
+            -------
+            uxl21
+        """
+
+        print(kargs)
+        type = DictUtil.getString(kargs, "type", QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_PNG)
+        version = DictUtil.getInteger(kargs, "version", QRCodeImageConstants.PYQRCODE_DEFAULT_VERSION)
+        errorCorrection = DictUtil.getString(kargs, "errorCorrection", QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_M)
         encode = DictUtil.getString(kargs, "encoding", "utf-8")
-        scale = DictUtil.getInteger(kargs, "scale", 1)
-        moduleColour = DictUtil.getInteger(kargs, "moduleColour", QRCodeImageConstants.DEFAULT_FILL_COLOUR)
+        scale = DictUtil.getInteger(kargs, "scale", QRCodeImageConstants.PYQRCODE_DEFAULT_SCALE)
+        moduleColour = DictUtil.getInteger(kargs, "fillColour", QRCodeImageConstants.DEFAULT_FILL_COLOUR)
         backgroundColour = DictUtil.getInteger(kargs, "backgroundColour", QRCodeImageConstants.DEFAULT_BACKGROUND_COLOUR)
 
-        qr = pyqrcode.create(qrCodeData, encoding=encode)
+        print("===>> ", type, version, errorCorrection, encode, scale, moduleColour, backgroundColour)
+        qr = pyqrcode.create(qrCodeData, error="H", version=version, encoding=encode)
         loweredType = type.lower()
 
-        if loweredType == QRCodeImageConstants.QRCODE_IMAGE_TYPE_PNG:
+        if loweredType == QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_PNG:
             callMethod = qr.png
-        elif loweredType == QRCodeImageConstants.QRCODE_IMAGE_TYPE_SVG:
+        elif loweredType == QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_SVG:
             callMethod = qr.svg
-        elif loweredType == QRCodeImageConstants.QRCODE_IMAGE_TYPE_EPS:
+        elif loweredType == QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_EPS:
             callMethod = qr.eps
-        elif loweredType == QRCodeImageConstants.QRCODE_IMAGE_TYPE_XBM:
+        elif loweredType == QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_XBM:
             callMethod = qr.xbm
         else:
             callMethod = qr.png
@@ -215,12 +284,11 @@ if __name__ == "__main__":
         "url": "https://blog.naver.com/uxl21x"
     }
 
-    generator = QRCodeImageGenerator(version=1, boxSize=3, border=2)
+    generator = QRCodeImageGenerator(version=1, boxSize=4, border=2)
+    generator.setColours(fillColour="#2e4e96")
     generator.addData(qrCodeData1)
     # generator.clearData()
-    # generator.addData(qrCodeData2)
-    generator.generate("D:\\qrcode1.png")
+    generator.addData(qrCodeData2)
+    generator.generate("./qrcode.png")
 
-    SimplePyQRCodeGenerator.generate(qrCodeData2, "D:\\qrcode2.png", encoding="utf-8")
-
-
+    SimplePyQRCodeGenerator.generate(qrCodeData1, "./pyqrcode.png", scale=3)
