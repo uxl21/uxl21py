@@ -119,7 +119,6 @@ class QRCodeImageGenerator:
         self.errorCorrection = DictUtil.getInteger(kargs, "errorCorrection", QRCodeImageConstants.QRCODE_ERROR_CORRECT_M)
         self.boxSize = DictUtil.getInteger(kargs, "boxSize", QRCodeImageConstants.QRCODE_DEFAULT_BOX_SIZE)
         self.border = DictUtil.getInteger(kargs, "border", QRCodeImageConstants.QRCODE_DEFAULT_BORDER)
-        print("--->> ", self.version, self.errorCorrection, self.boxSize, self.border)
 
         self.fillColour = QRCodeImageConstants.DEFAULT_FILL_COLOUR
         self.backgroundColour = QRCodeImageConstants.DEFAULT_BACKGROUND_COLOUR
@@ -251,7 +250,6 @@ class SimplePyQRCodeGenerator:
         moduleColour = DictUtil.getInteger(kargs, "fillColour", QRCodeImageConstants.DEFAULT_FILL_COLOUR)
         backgroundColour = DictUtil.getInteger(kargs, "backgroundColour", QRCodeImageConstants.DEFAULT_BACKGROUND_COLOUR)
 
-        print("===>> ", type, version, errorCorrection, encode, scale, moduleColour, backgroundColour)
         qr = pyqrcode.create(qrCodeData, error="H", version=version, encoding=encode)
         loweredType = type.lower()
 
