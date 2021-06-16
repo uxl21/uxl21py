@@ -295,9 +295,12 @@ class DictUtil:
             -------
             uxl21
         """
-        
-        return DataUtil.isEmpty(data.get(key))
 
+        if DictUtil.hasKey(data, key):
+            return DataUtil.isEmpty(data.get(key))
+        else:
+            return True
+                
 
     @staticmethod
     def isNotEmpty(data:dict, key:str) -> bool:
@@ -348,7 +351,7 @@ class DictUtil:
             uxl21
         """
 
-        if DataUtil.isEmpty(data, key):
+        if DictUtil.isEmpty(data, key):
             return default
 
         else:
@@ -370,7 +373,7 @@ class DictUtil:
             uxl21
         """
 
-        if DataUtil.isEmpty(data, key):
+        if DictUtil.isEmpty(data, key):
             return default
         else:
             return str(data.get(key))
