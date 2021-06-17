@@ -106,7 +106,7 @@ class ListUtil:
 
 class DataUtil:
     """
-        Utility class for general data process
+        Utility class for general data process.
         
         Author
         -----
@@ -135,8 +135,8 @@ class DataUtil:
             if strValue == "":            
                 return True
 
-        # check list
-        if type(value) is list and len(value) == 0:
+        # check list, tuple, dict
+        if (type(value) is list or type(value) is tuple or type(value) is dict) and len(value) == 0:
             return True
 
         return False
