@@ -92,7 +92,8 @@ class Data:
 
 
 class RESTAPIConstants:
-    CLASS_TEMPLATE  = '''
+    # for controller class
+    CONTROLLER_CLASS_TEMPLATE  = '''
         package {basePackage}.controller;
 
         import java.util.*;
@@ -115,7 +116,6 @@ class RESTAPIConstants:
         import net.uxl21.uxl21j.base.BaseController;
 
         import {basePackage}.service.{process}Service;
-
 
 
         @Tag(name = "{tag}", description = "{tagDescription}")
@@ -148,12 +148,71 @@ class RESTAPIConstants:
     API_RESPONSE_TEMPLATE = '''@ApiResponse(responseCode = "{responseCode}", description = "{description}", content = {startBracket}@Content(mediaType = "{mediaType}", encoding = @Encoding(name = "{encoding}")){endBracket})'''
 
 
+    # for service class
+    SERVICE_CLASS_TEMPLATE = '''
+        package {basePackage}.service;
+
+        import java.util.*;
+
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.stereotype.Service;
+
+        import net.uxl21.uxl21j.base.BaseService;
+        import {basePackage}.dao.{process}DAO;
+
+
+        @Service(value="{processLower}Service")
+        public class {process}Service extends BaseService {startBracket}
+            
+            @Autowired
+            private {process}DAO {processLower}DAO = null;
+
+        {endBracket}
+    '''
+
+    # for DAO class
+    DAO_CLASS_TEMPLATE = '''
+        package {basePackage}.dao;
+
+        import java.util.*;
+
+        import org.springframework.stereotype.Repository;
+
+        import net.uxl21.uxl21j.base.BaseDAO;
+
+
+        @Repository(value="{processLower}DAO")
+        public class {process}DAO extends BaseDAO {startBracket}
+            
+        {endBracket}
+    '''
+
 
 
 
 class RESTAPIGenerator:
+    """
+        REST API source code generator.
+
+        Author
+        -------
+        uxl21
+    """
 
     def generate(controller:Data.Controller) -> str:
+        """
+            Generates source code contents.
+
+            Parameters
+            -------
+            controller: Data.Controller
+                Data.Controller instance to generate source code contents.
+
+            Author
+            -------
+            uxl21
+        """
+
         for endpoint in controller.endpoints:
             # @RequestMapping - method
             count = len(endpoint.httpMethods)
@@ -216,7 +275,7 @@ class RESTAPIGenerator:
             )
 
             
-        classSrc = RESTAPIConstants.CLASS_TEMPLATE.format(
+        classSrc = RESTAPIConstants.CONTROLLER_CLASS_TEMPLATE.format(
             basePackage=controller.basePackage, tag=controller.tag, tagDescription=controller.tagDescription,
             path=controller.path, className=controller.className, process=controller.process,
             processLower=controller.process.lower(), methods=endpointSrc,
