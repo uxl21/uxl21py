@@ -1,10 +1,12 @@
-#
-# Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
-# 
-# This file is a part of OAS Generator
-# 
-# @author uxl21
-#
+"""
+    Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
+    This file is a part of uxl21py
+
+    
+    Author
+    -----
+    uxl21
+"""
 import datetime
 import json
 import logging
