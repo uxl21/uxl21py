@@ -4,7 +4,7 @@
 
     
     Author
-    -----
+    -------
     uxl21
 """
 
@@ -23,7 +23,7 @@ class ListUtil:
         Utility class for list(array).
 
         Author
-        -----
+        -------
         uxl21
     """ 
 
