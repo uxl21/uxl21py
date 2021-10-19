@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uxl21pyrestapi &mdash; uxl21py 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> uxl21py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">uxl21py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>uxl21pyrestapi</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uxl21pyrestapi</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;</span>
+<span class="sd">    This file is a part of uxl21py</span>
+
+<span class="sd">    </span>
+<span class="sd">    Author</span>
+<span class="sd">    -------</span>
+<span class="sd">    uxl21</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Data"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.Data">[docs]</a><span class="k">class</span> <span class="nc">Data</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Data class containing data classes related to REST API.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Data.Controller"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.Data.Controller">[docs]</a>    <span class="k">class</span> <span class="nc">Controller</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Data class representing the Controller for REST API.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">basePackage</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">className</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tagDescription</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">endpoints</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># array of Endpoint</span></div>
+
+
+<div class="viewcode-block" id="Data.Endpoint"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.Data.Endpoint">[docs]</a>    <span class="k">class</span> <span class="nc">Endpoint</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Data class representing the endpoint of Controller for REST API.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">httpMethods</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pathVars</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameterType</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1"># json, form</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">returnType</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">responseType</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># json, xml, string</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># array of APIResponse</span></div>
+
+
+<div class="viewcode-block" id="Data.APIResponse"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.Data.APIResponse">[docs]</a>    <span class="k">class</span> <span class="nc">APIResponse</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Data class representing the API response of endpoint for REST API.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">responseCode</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">mediaType</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">responseCode</span> <span class="o">=</span> <span class="n">responseCode</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mediaType</span> <span class="o">=</span> <span class="n">mediaType</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span></div>
+
+
+<div class="viewcode-block" id="Data.Parameter"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.Data.Parameter">[docs]</a>    <span class="k">class</span> <span class="nc">Parameter</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Data class representing the parameter of endpoint for REST API.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="RESTAPIConstants"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.RESTAPIConstants">[docs]</a><span class="k">class</span> <span class="nc">RESTAPIConstants</span><span class="p">:</span>
+    <span class="c1"># for controller class</span>
+    <span class="n">CONTROLLER_CLASS_TEMPLATE</span>  <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        package </span><span class="si">{basePackage}</span><span class="s1">.controller;</span>
+
+<span class="s1">        import java.util.*;</span>
+
+<span class="s1">        import org.springframework.beans.factory.annotation.Autowired;</span>
+<span class="s1">        import org.springframework.web.bind.annotation.PathVariable;</span>
+<span class="s1">        import org.springframework.web.bind.annotation.RequestMapping;</span>
+<span class="s1">        import org.springframework.web.bind.annotation.RequestMethod;</span>
+<span class="s1">        import org.springframework.web.bind.annotation.ResponseBody;</span>
+<span class="s1">        import org.springframework.web.bind.annotation.RestController;</span>
+
+<span class="s1">        import io.swagger.v3.oas.annotations.Operation;</span>
+<span class="s1">        import io.swagger.v3.oas.annotations.Parameter;</span>
+<span class="s1">        import io.swagger.v3.oas.annotations.media.Content;</span>
+<span class="s1">        import io.swagger.v3.oas.annotations.media.Encoding;</span>
+<span class="s1">        import io.swagger.v3.oas.annotations.responses.ApiResponse;</span>
+<span class="s1">        import io.swagger.v3.oas.annotations.responses.ApiResponses;</span>
+<span class="s1">        import io.swagger.v3.oas.annotations.tags.Tag;</span>
+
+<span class="s1">        import net.uxl21.uxl21j.base.BaseController;</span>
+
+<span class="s1">        import </span><span class="si">{basePackage}</span><span class="s1">.service.</span><span class="si">{process}</span><span class="s1">Service;</span>
+
+
+<span class="s1">        @Tag(name = &quot;</span><span class="si">{tag}</span><span class="s1">&quot;, description = &quot;</span><span class="si">{tagDescription}</span><span class="s1">&quot;)</span>
+<span class="s1">        @RestController</span>
+<span class="s1">        @RequestMapping(path = &quot;</span><span class="si">{path}</span><span class="s1">&quot;)</span>
+<span class="s1">        public class </span><span class="si">{className}</span><span class="s1"> extends BaseController </span><span class="si">{startBracket}</span><span class="s1"></span>
+
+<span class="s1">            @Autowired</span>
+<span class="s1">            private </span><span class="si">{process}</span><span class="s1">Service </span><span class="si">{processLower}</span><span class="s1">Service = null;</span>
+
+<span class="s1">            </span><span class="si">{methods}</span><span class="s1"></span>
+<span class="s1">        </span>
+<span class="s1">        </span><span class="si">{endBracket}</span><span class="s1"></span>
+<span class="s1">    &#39;&#39;&#39;</span>
+
+    <span class="n">ENDPOINT_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            @Operation(summary = &quot;</span><span class="si">{summary}</span><span class="s1">&quot;)</span>
+<span class="s1">            @RequestMapping(path = &quot;</span><span class="si">{path}</span><span class="s1">&quot;, method = </span><span class="si">{startBracket}{httpMethod}{endBracket}</span><span class="s1">)</span>
+<span class="s1">            @ApiResponses(</span>
+<span class="s1">                value = </span><span class="si">{startBracket}</span><span class="s1"></span>
+<span class="s1">                    </span><span class="si">{apiResponses}</span><span class="s1"></span>
+<span class="s1">                </span><span class="si">{endBracket}</span><span class="s1"></span>
+<span class="s1">            )</span>
+<span class="s1">            @ResponseBody</span>
+<span class="s1">            public </span><span class="si">{returnType}</span><span class="s1"> </span><span class="si">{name}</span><span class="s1">(</span><span class="si">{pathVars}{parameters}</span><span class="s1">) </span><span class="si">{startBracket}</span><span class="s1"></span>
+<span class="s1">                return null;</span>
+<span class="s1">            </span><span class="si">{endBracket}</span><span class="s1"></span>
+<span class="s1">    &#39;&#39;&#39;</span>
+
+    <span class="n">API_RESPONSE_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;@ApiResponse(responseCode = &quot;</span><span class="si">{responseCode}</span><span class="s1">&quot;, description = &quot;</span><span class="si">{description}</span><span class="s1">&quot;, content = </span><span class="si">{startBracket}</span><span class="s1">@Content(mediaType = &quot;</span><span class="si">{mediaType}</span><span class="s1">&quot;, encoding = @Encoding(name = &quot;</span><span class="si">{encoding}</span><span class="s1">&quot;))</span><span class="si">{endBracket}</span><span class="s1">)&#39;&#39;&#39;</span>
+
+
+    <span class="c1"># for service class</span>
+    <span class="n">SERVICE_CLASS_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        package </span><span class="si">{basePackage}</span><span class="s1">.service;</span>
+
+<span class="s1">        import java.util.*;</span>
+
+<span class="s1">        import org.springframework.beans.factory.annotation.Autowired;</span>
+<span class="s1">        import org.springframework.stereotype.Service;</span>
+
+<span class="s1">        import net.uxl21.uxl21j.base.BaseService;</span>
+<span class="s1">        import </span><span class="si">{basePackage}</span><span class="s1">.dao.</span><span class="si">{process}</span><span class="s1">DAO;</span>
+
+
+<span class="s1">        @Service(value=&quot;</span><span class="si">{processLower}</span><span class="s1">Service&quot;)</span>
+<span class="s1">        public class </span><span class="si">{process}</span><span class="s1">Service extends BaseService </span><span class="si">{startBracket}</span><span class="s1"></span>
+<span class="s1">            </span>
+<span class="s1">            @Autowired</span>
+<span class="s1">            private </span><span class="si">{process}</span><span class="s1">DAO </span><span class="si">{processLower}</span><span class="s1">DAO = null;</span>
+
+<span class="s1">        </span><span class="si">{endBracket}</span><span class="s1"></span>
+<span class="s1">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># for DAO class</span>
+    <span class="n">DAO_CLASS_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        package </span><span class="si">{basePackage}</span><span class="s1">.dao;</span>
+
+<span class="s1">        import java.util.*;</span>
+
+<span class="s1">        import org.springframework.stereotype.Repository;</span>
+
+<span class="s1">        import net.uxl21.uxl21j.base.BaseDAO;</span>
+
+
+<span class="s1">        @Repository(value=&quot;</span><span class="si">{processLower}</span><span class="s1">DAO&quot;)</span>
+<span class="s1">        public class </span><span class="si">{process}</span><span class="s1">DAO extends BaseDAO </span><span class="si">{startBracket}</span><span class="s1"></span>
+<span class="s1">            </span>
+<span class="s1">        </span><span class="si">{endBracket}</span><span class="s1"></span>
+<span class="s1">    &#39;&#39;&#39;</span></div>
+
+
+
+
+<div class="viewcode-block" id="RESTAPIGenerator"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.RESTAPIGenerator">[docs]</a><span class="k">class</span> <span class="nc">RESTAPIGenerator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        REST API source code generator.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RESTAPIGenerator.generate"><a class="viewcode-back" href="../uxl21pyrestapi.html#uxl21pyrestapi.RESTAPIGenerator.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span><span class="n">Data</span><span class="o">.</span><span class="n">Controller</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Generates source code contents.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            controller: Data.Controller</span>
+<span class="sd">                Data.Controller instance to generate source code contents.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">endpoint</span> <span class="ow">in</span> <span class="n">controller</span><span class="o">.</span><span class="n">endpoints</span><span class="p">:</span>
+            <span class="c1"># @RequestMapping - method</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">endpoint</span><span class="o">.</span><span class="n">httpMethods</span><span class="p">)</span>
+            <span class="n">httpMethodStr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+                <span class="n">httpMethodStr</span> <span class="o">+=</span> <span class="s2">&quot;RequestMethod.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">endpoint</span><span class="o">.</span><span class="n">httpMethods</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">httpMethodStr</span> <span class="o">+=</span> <span class="s2">&quot;, &quot;</span>
+            
+
+            <span class="c1"># @ApiResponses</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">endpoint</span><span class="o">.</span><span class="n">responses</span><span class="p">)</span>
+            <span class="n">apiResponsesSrc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+                <span class="n">apiResponsesSrc</span> <span class="o">+=</span> <span class="n">RESTAPIConstants</span><span class="o">.</span><span class="n">API_RESPONSE_TEMPLATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">responseCode</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">responseCode</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                    <span class="n">mediaType</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mediaType</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+                    <span class="n">startBracket</span><span class="o">=</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="n">endBracket</span><span class="o">=</span><span class="s2">&quot;}&quot;</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">apiResponsesSrc</span> <span class="o">+=</span> <span class="s2">&quot;,</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+
+            <span class="c1"># @PathVariable</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">endpoint</span><span class="o">.</span><span class="n">pathVars</span><span class="p">)</span>
+            <span class="n">pathVarsSrc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+                <span class="n">pathVarsSrc</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;@PathVariable final String &quot;</span> <span class="o">+</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">pathVars</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">pathVarsSrc</span> <span class="o">+=</span> <span class="s2">&quot;, &quot;</span>
+
+
+            <span class="c1"># parameters</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">parametersSrc</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span>
+
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">endpoint</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>        
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+                <span class="n">parametersSrc</span> <span class="o">+=</span> <span class="p">(</span><span class="n">endpoint</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">parametersSrc</span> <span class="o">+=</span> <span class="s2">&quot;, &quot;</span>
+
+
+            <span class="c1"># complte endpoint</span>
+            <span class="n">endpointSrc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">endpointSrc</span> <span class="o">+=</span> <span class="n">RESTAPIConstants</span><span class="o">.</span><span class="n">ENDPOINT_TEMPLATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">summary</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span> 
+                <span class="n">path</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">httpMethod</span><span class="o">=</span><span class="n">httpMethodStr</span><span class="p">,</span>
+                <span class="n">apiResponses</span><span class="o">=</span><span class="n">apiResponsesSrc</span><span class="p">,</span>
+                <span class="n">returnType</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">returnType</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pathVars</span><span class="o">=</span><span class="n">pathVarsSrc</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parametersSrc</span><span class="p">,</span>
+                <span class="n">startBracket</span><span class="o">=</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="n">endBracket</span><span class="o">=</span><span class="s2">&quot;}&quot;</span>
+            <span class="p">)</span>
+
+            
+        <span class="n">classSrc</span> <span class="o">=</span> <span class="n">RESTAPIConstants</span><span class="o">.</span><span class="n">CONTROLLER_CLASS_TEMPLATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">basePackage</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">basePackage</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">tagDescription</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">tagDescription</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">className</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">className</span><span class="p">,</span> <span class="n">process</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">process</span><span class="p">,</span>
+            <span class="n">processLower</span><span class="o">=</span><span class="n">controller</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">methods</span><span class="o">=</span><span class="n">endpointSrc</span><span class="p">,</span>
+            <span class="n">startBracket</span><span class="o">=</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="n">endBracket</span><span class="o">=</span><span class="s2">&quot;}&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">classSrc</span></div></div>
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">Controller</span><span class="p">()</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">basePackage</span> <span class="o">=</span> <span class="s2">&quot;net.uxl21.uxl21j.restapi.example&quot;</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;Config&quot;</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="s2">&quot;Config&quot;</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">className</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">process</span> <span class="o">+</span> <span class="s2">&quot;Controller&quot;</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">tagDescription</span> <span class="o">=</span> <span class="s2">&quot;API for Configurations&quot;</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;$</span><span class="si">{uxl21j.restapi.version}</span><span class="s2">/config&quot;</span>
+
+    <span class="n">configList</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">Endpoint</span><span class="p">()</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;searchConfigList&quot;</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">httpMethods</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span> <span class="p">]</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/list/</span><span class="si">{siteCd}</span><span class="s2">&quot;</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">pathVars</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;siteCd&quot;</span> <span class="p">]</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">returnType</span> <span class="o">=</span> <span class="s2">&quot;List&lt;Map&lt;String, Object&gt;&gt;&quot;</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">responseType</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="s2">&quot;Get configuration list&quot;</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">responses</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">APIResponse</span><span class="p">(</span><span class="s2">&quot;200&quot;</span><span class="p">,</span> <span class="s2">&quot;Configuration list&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">APIResponse</span><span class="p">(</span><span class="s2">&quot;400&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid access or authorization token&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">configList</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;Map&lt;String, Object&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;param&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">endpoints</span> <span class="o">=</span> <span class="p">[</span> <span class="n">configList</span> <span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">RESTAPIGenerator</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">controller</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

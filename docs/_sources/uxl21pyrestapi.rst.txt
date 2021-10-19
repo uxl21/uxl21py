@@ -1,0 +1,7 @@
+uxl21pyrestapi module
+=====================
+
+.. automodule:: uxl21pyrestapi
+   :members:
+   :undoc-members:
+   :show-inheritance:

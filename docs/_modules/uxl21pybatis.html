@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uxl21pybatis &mdash; uxl21py 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> uxl21py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">uxl21py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>uxl21pybatis</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uxl21pybatis</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;</span>
+<span class="sd">    This file is a part of uxl21py</span>
+
+<span class="sd">    </span>
+<span class="sd">    Author</span>
+<span class="sd">    -----</span>
+<span class="sd">    uxl21</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sqlite3.dbapi2</span> <span class="kn">import</span> <span class="n">Error</span>
+<span class="kn">from</span> <span class="nn">xml.dom</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">minidom</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">cx_Oracle</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># for SQL Mapper</span>
+<span class="c1">#</span>
+
+<div class="viewcode-block" id="PySQLMapper"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLMapper">[docs]</a><span class="k">class</span> <span class="nc">PySQLMapper</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An abstract class defining methods for SQL mapper.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xmlPath</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+<div class="viewcode-block" id="PySQLMapper.getQuery"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLMapper.getQuery">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">getQuery</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="PySQLMapper.getResultType"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLMapper.getResultType">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">getResultType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="PySQLMapException"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLMapException">[docs]</a><span class="k">class</span> <span class="nc">PySQLMapException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The exception class for PyBatis</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="PybatisSQLMapper"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PybatisSQLMapper">[docs]</a><span class="k">class</span> <span class="nc">PybatisSQLMapper</span><span class="p">(</span><span class="n">PySQLMapper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pybatis SQL mapper class.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xmlPath</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__QUERY_TYPES</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="s2">&quot;insert&quot;</span><span class="p">,</span> <span class="s2">&quot;update&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">,</span> <span class="s2">&quot;sql&quot;</span> <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xmlPath</span> <span class="o">=</span> <span class="n">xmlPath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xmldoc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__namespace</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__createMapper</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">__createMapper</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__xmldoc</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__xmlPath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__namespace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xmldoc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;mapper&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;namespace&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__namespace</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__namespace</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PySQLMapException</span><span class="p">(</span><span class="s2">&quot;Mapper XML has to be specified the namespace attribute&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__QUERY_TYPES</span><span class="p">:</span>
+            <span class="n">elementlist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xmldoc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elementlist</span><span class="p">:</span>
+                <span class="n">queryId</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+                <span class="c1"># when &lt;sql&gt; is child of the other node, it has no attribute &#39;id&#39;</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">queryId</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">queryId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__namespace</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">element</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">queryId</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PySQLMapException</span><span class="p">(</span><span class="s2">&quot;SQL &#39;</span><span class="si">{0}</span><span class="s2">&#39; is duplicated in mapper &#39;</span><span class="si">{1}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xmlPath</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span><span class="p">[</span><span class="n">queryId</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span>
+
+
+    <span class="k">def</span> <span class="nf">__setAttrToAll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span><span class="n">Node</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">nodeFilter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nodeFilter</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">!=</span> <span class="n">nodeFilter</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">hasChildNodes</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__setAttrToAll</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">nodeFilter</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">hasAttribute</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__checkTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">replaced</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[n|N][u|U][l|L][l|L]&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">paramName</span> <span class="ow">in</span> <span class="n">parameter</span><span class="p">:</span>
+            <span class="n">paramValue</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span> <span class="k">if</span> <span class="n">parameter</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">paramName</span><span class="p">)</span> <span class="o">==</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">[</span><span class="n">paramName</span><span class="p">])</span>
+            <span class="n">paramValue</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[n|N][u|U][l|L][l|L]&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">paramValue</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">paramValue</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+                <span class="n">replaced</span> <span class="o">=</span> <span class="n">replaced</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="n">paramValue</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">replaced</span> <span class="o">=</span> <span class="n">replaced</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">paramValue</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">replaced</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__getQueryContent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span><span class="n">Node</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">hasChildNodes</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s2">&quot;if&quot;</span><span class="p">:</span>
+                <span class="n">ifTest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__checkTest</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s2">&quot;ifTest&quot;</span><span class="p">,</span> <span class="n">ifTest</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">ifTest</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                        <span class="n">sql</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getQueryContent</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>                        
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__setAttrToAll</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s2">&quot;ifTest&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;if&quot;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                    <span class="n">sql</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getQueryContent</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parentNode</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s2">&quot;if&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parentNode</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;ifTest&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s2">&quot;sql&quot;</span><span class="p">:</span>
+                        <span class="n">sql</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getQueryContent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__namespace</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;refid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">],</span> <span class="n">parameter</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">sql</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">nodeValue</span><span class="p">)</span>                    
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># &lt;sql refid=&quot;...&quot;/&gt;</span>
+                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s2">&quot;sql&quot;</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">hasAttribute</span><span class="p">(</span><span class="s2">&quot;refid&quot;</span><span class="p">):</span>
+                    <span class="n">sql</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getQueryContent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__namespace</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;refid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">],</span> <span class="n">parameter</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">nodeValue</span> <span class="o">==</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">nodeValue</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sql</span>
+
+
+<div class="viewcode-block" id="PybatisSQLMapper.getQuery"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PybatisSQLMapper.getQuery">[docs]</a>    <span class="k">def</span> <span class="nf">getQuery</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the query string for the specified id with parameter.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PySQLMapException</span><span class="p">(</span><span class="s2">&quot;SQL &#39;</span><span class="si">{0}</span><span class="s2">&#39; is not found in mapper &#39;</span><span class="si">{1}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__xmlPath</span><span class="p">))</span>
+
+        <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getQueryContent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> <span class="n">parameter</span><span class="p">)</span>
+    
+        <span class="k">if</span> <span class="n">parameter</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">paramValue</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">for</span> <span class="n">paramName</span> <span class="ow">in</span> <span class="n">parameter</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">parameter</span><span class="p">[</span><span class="n">paramName</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">parameter</span><span class="p">[</span><span class="n">paramName</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">:</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="n">queryString</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;#{&quot;</span> <span class="o">+</span> <span class="n">paramName</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">[</span><span class="n">paramName</span><span class="p">]))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">queryString</span> <span class="o">=</span> <span class="n">queryString</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;#{&quot;</span> <span class="o">+</span> <span class="n">paramName</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">[</span><span class="n">paramName</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;&#39;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+                
+                <span class="n">queryString</span> <span class="o">=</span> <span class="n">queryString</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;${&quot;</span> <span class="o">+</span> <span class="n">paramName</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">[</span><span class="n">paramName</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">queryString</span></div>
+
+
+<div class="viewcode-block" id="PybatisSQLMapper.getResultType"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PybatisSQLMapper.getResultType">[docs]</a>    <span class="k">def</span> <span class="nf">getResultType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the resultType attribute&#39;s value for the specified query id.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mapper</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;resultType&quot;</span><span class="p">))</span></div></div>
+
+
+
+<span class="c1">#</span>
+<span class="c1"># for SQL Clients</span>
+<span class="c1">#</span>
+
+<div class="viewcode-block" id="PySQLClientSession"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession">[docs]</a><span class="k">class</span> <span class="nc">PySQLClientSession</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An abstract class for the client session</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+<div class="viewcode-block" id="PySQLClientSession.connect"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession.connect">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Connects to the database.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="PySQLClientSession.selectlist"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession.selectlist">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">selectlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="PySQLClientSession.selectOne"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession.selectOne">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">selectOne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="PySQLClientSession.insert"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession.insert">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="PySQLClientSession.update"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession.update">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="PySQLClientSession.delete"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession.delete">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="PySQLClientSession.close"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.PySQLClientSession.close">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span></div></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="OracleClientSession"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession">[docs]</a><span class="k">class</span> <span class="nc">OracleClientSession</span><span class="p">(</span><span class="n">PySQLClientSession</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The client session class for Oracle.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sqlMapper</span><span class="p">:</span><span class="n">PySQLMapper</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span> <span class="o">=</span> <span class="n">sqlMapper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="kc">None</span>        
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="OracleClientSession.connect"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="n">cx_Oracle</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="OracleClientSession.selectlist"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession.selectlist">[docs]</a>    <span class="k">def</span> <span class="nf">selectlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+        
+        <span class="c1"># &lt;select id=&quot;...&quot; resultType=&quot;map|MAP|Map&quot;&gt;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getResultType</span><span class="p">(</span><span class="n">queryId</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;MAP&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__rowTodictFactory</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
+
+        <span class="nb">list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">list</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="OracleClientSession.selectOne"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession.selectOne">[docs]</a>    <span class="k">def</span> <span class="nf">selectOne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+
+        <span class="c1"># &lt;select id=&quot;...&quot; resultType=&quot;map|MAP|Map&quot;&gt;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getResultType</span><span class="p">(</span><span class="n">queryId</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;MAP&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__rowTodictFactory</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
+
+        <span class="n">one</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">one</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="OracleClientSession.insert"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="OracleClientSession.update"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+            <span class="n">count</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
+
+        <span class="k">except</span> <span class="n">Error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">count</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="OracleClientSession.delete"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="OracleClientSession.close"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.OracleClientSession.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__rowTodictFactory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">):</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">rowfactory</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span></div>
+
+
+
+<span class="c1"># sqlite3</span>
+<div class="viewcode-block" id="SQLite3ClientSession"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession">[docs]</a><span class="k">class</span> <span class="nc">SQLite3ClientSession</span><span class="p">(</span><span class="n">PySQLClientSession</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sqlMapper</span><span class="p">:</span><span class="n">PySQLMapper</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span> <span class="o">=</span> <span class="n">sqlMapper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="SQLite3ClientSession.connect"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Connects to SQLite3 database.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="SQLite3ClientSession.selectlist"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession.selectlist">[docs]</a>    <span class="k">def</span> <span class="nf">selectlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+       
+        <span class="c1"># &lt;select id=&quot;...&quot; resultType=&quot;map|MAP|Map&quot;&gt;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getResultType</span><span class="p">(</span><span class="n">queryId</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;MAP&quot;</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rowTodictFactory</span>
+
+        <span class="nb">list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">list</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="SQLite3ClientSession.selectOne"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession.selectOne">[docs]</a>    <span class="k">def</span> <span class="nf">selectOne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+
+        <span class="c1"># &lt;select id=&quot;...&quot; resultType=&quot;map|MAP|Map&quot;&gt;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getResultType</span><span class="p">(</span><span class="n">queryId</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;MAP&quot;</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rowTodictFactory</span>
+
+
+        <span class="n">one</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">one</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="SQLite3ClientSession.insert"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="SQLite3ClientSession.update"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+            <span class="n">count</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
+
+        <span class="k">except</span> <span class="n">Error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">count</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="SQLite3ClientSession.delete"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="SQLite3ClientSession.close"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.SQLite3ClientSession.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__rowTodictFactory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span> <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">d</span></div>
+
+
+<span class="c1"># mysql</span>
+<div class="viewcode-block" id="MySQLClientSession"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession">[docs]</a><span class="k">class</span> <span class="nc">MySQLClientSession</span><span class="p">(</span><span class="n">PySQLClientSession</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sqlMapper</span><span class="p">:</span><span class="n">PySQLMapper</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span> <span class="o">=</span> <span class="n">sqlMapper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="kc">None</span>
+
+    
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="MySQLClientSession.connect"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">charset</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="n">charset</span><span class="p">)</span></div>
+
+    
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="MySQLClientSession.selectlist"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession.selectlist">[docs]</a>    <span class="k">def</span> <span class="nf">selectlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+        
+        <span class="c1">#if self.__sqlMapper.getResultType(queryId).upper() == &quot;MAP&quot;:</span>
+        <span class="c1">#    cursor.row_factory = self.__rowTodictFactory</span>
+
+        <span class="nb">list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">list</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="MySQLClientSession.selectOne"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession.selectOne">[docs]</a>    <span class="k">def</span> <span class="nf">selectOne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+
+        <span class="c1">#if self.__sqlMapper.getResultType(queryId).upper() == &quot;MAP&quot;:</span>
+        <span class="c1">#    cursor.row_factory = self.__rowTodictFactory</span>
+
+        <span class="n">one</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">one</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="MySQLClientSession.insert"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="MySQLClientSession.update"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">queryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sqlMapper</span><span class="o">.</span><span class="n">getQuery</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">queryString</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+            <span class="n">count</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
+
+        <span class="k">except</span> <span class="n">Error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">count</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="MySQLClientSession.delete"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryId</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">queryId</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># implemented</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="MySQLClientSession.close"><a class="viewcode-back" href="../uxl21pybatis.html#uxl21pybatis.MySQLClientSession.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

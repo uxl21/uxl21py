@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uxl21pyutil &mdash; uxl21py 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> uxl21py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">uxl21py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>uxl21pyutil</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uxl21pyutil</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;</span>
+<span class="sd">    This file is a part of uxl21py</span>
+
+<span class="sd">    </span>
+<span class="sd">    Author</span>
+<span class="sd">    -------</span>
+<span class="sd">    uxl21</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pandas.core.frame</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<span class="kn">from</span> <span class="nn">pandas.core.series</span> <span class="kn">import</span> <span class="n">Series</span>
+
+
+
+<div class="viewcode-block" id="ListUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.ListUtil">[docs]</a><span class="k">class</span> <span class="nc">ListUtil</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility class for list(array).</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+
+<div class="viewcode-block" id="ListUtil.filterList"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.ListUtil.filterList">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">filterList</span><span class="p">(</span><span class="nb">list</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">filterValue</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Filters list items with their property name and value.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            list: list</span>
+<span class="sd">                Original data list</span>
+<span class="sd">            prop: str</span>
+<span class="sd">                Property name of the item to filter</span>
+<span class="sd">            filterValue: Any</span>
+<span class="sd">                Property&#39;s value of the item to filter</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            list</span>
+<span class="sd">                Contains filtered items</span>
+
+<span class="sd">            Examples</span>
+<span class="sd">            -------</span>
+<span class="sd">            &gt;&gt;&gt; list = [</span>
+<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;A01&quot;, &quot;type&quot;: &quot;api&quot; },</span>
+<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;B11&quot;, &quot;type&quot;: &quot;pos&quot; },</span>
+<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;B12&quot;, &quot;type&quot;: &quot;pos&quot; },</span>
+<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;C07&quot;, &quot;type&quot;: &quot;backoffice&quot; },</span>
+<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;D08&quot;, &quot;type&quot;: &quot;api&quot; },</span>
+<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;S21&quot;, &quot;type&quot;: &quot;backoffice&quot; }</span>
+<span class="sd">            &gt;&gt;&gt; ]</span>
+<span class="sd">            &gt;&gt;&gt; filteredList = ListUtil.filterList(list, &quot;type&quot;, &quot;api&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(filteredList)</span>
+<span class="sd">            &gt;&gt;&gt; ```</span>
+<span class="sd">            &gt;&gt;&gt; [</span>
+<span class="sd">            &gt;&gt;&gt;     { &quot;code&quot;: &quot;A01&quot;, &quot;type&quot;: &quot;api&quot; },</span>
+<span class="sd">            &gt;&gt;&gt;     { &quot;code&quot;: &quot;D08&quot;, &quot;type&quot;: &quot;api&quot; }</span>
+<span class="sd">            &gt;&gt;&gt; ]</span>
+<span class="sd">            &gt;&gt;&gt; ```</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">numpy</span><span class="o">.</span><span class="n">array</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="o">!=</span> <span class="n">filterValue</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="ListUtil.getMax"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.ListUtil.getMax">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">getMax</span><span class="p">(</span><span class="nb">list</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the greatest value among array&#39;s item with its property name.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            list: list</span>
+<span class="sd">                List to calculate max value</span>
+<span class="sd">            prop: any</span>
+<span class="sd">                Item&#39;s property name</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            any</span>
+<span class="sd">                The maximum value</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div></div>
+
+
+
+<div class="viewcode-block" id="DataUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil">[docs]</a><span class="k">class</span> <span class="nc">DataUtil</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility class for general data process.</span>
+<span class="sd">        </span>
+<span class="sd">        Author</span>
+<span class="sd">        -----</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DataUtil.isEmpty"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.isEmpty">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">isEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nb">any</span><span class="p">,</span> <span class="n">trim</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns true if the value is null or empty string, zero-length array,</span>
+<span class="sd">            false otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># check None</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># check string</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">strValue</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">trim</span> <span class="k">else</span> <span class="n">value</span>
+            
+            <span class="k">if</span> <span class="n">strValue</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>            
+                <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># check list, tuple, dict</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">tuple</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    
+<div class="viewcode-block" id="DataUtil.isNotEmpty"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.isNotEmpty">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">isNotEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns true if the value is not null and has value,</span>
+<span class="sd">            false otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataUtil.isAnyEmpty"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.isAnyEmpty">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">isAnyEmpty</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns true if the one of the arguments is empty(DataUtil.isEmpty(value) is true),</span>
+<span class="sd">            false otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">argValue</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">argValue</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="DataUtil.nvl"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.nvl">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">nvl</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nb">any</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the default value if the value is empty(DataUtil.isEmpty(value) is true),</span>
+<span class="sd">            original value otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">defaultValue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="DataUtil.ifelse"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.ifelse">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">condition</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">trueValue</span><span class="p">:</span><span class="nb">any</span><span class="p">,</span> <span class="n">falseValue</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns &#39;trueValue&#39; if the given condition is True, &#39;falseValue&#39; otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">trueValue</span> <span class="k">if</span> <span class="n">condition</span> <span class="k">else</span> <span class="n">falseValue</span></div>
+
+
+<div class="viewcode-block" id="DataUtil.decode"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.decode">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            &#39;decode()&#39; function just like Oracle DECODE()</span>
+
+<span class="sd">            Examples:</span>
+<span class="sd">            -------</span>
+<span class="sd">            &gt;&gt;&gt; foo = &quot;foo&quot;</span>
+
+<span class="sd">            &gt;&gt;&gt; value = DataUtil.decode(foo, &quot;foo&quot;, &quot;F&quot;, &quot;X&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(value)    # =&gt; &quot;F&quot;</span>
+
+<span class="sd">            &gt;&gt;&gt; value = DataUtil.decode(foo, &quot;Xoo&quot;, &quot;X&quot;, &quot;foo&quot;, &quot;F&quot;, &quot;Zoo&quot;, &quot;Z&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(value)    # =&gt; &quot;F&quot;</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">length</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">decodedValue</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">args</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+                <span class="n">decodedValue</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">2</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># in case of no matched value, </span>
+        <span class="c1"># if args length is even, returns the original value or else the last element of args</span>
+        <span class="k">if</span> <span class="n">decodedValue</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">decodedValue</span> <span class="o">=</span> <span class="n">value</span> <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="n">decodedValue</span></div>
+
+
+<div class="viewcode-block" id="DataUtil.toBoolean"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.toBoolean">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">toBoolean</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nb">any</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns boolean value from the given value.</span>
+<span class="sd">            If value is empty, returns &#39;default&#39;.</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">default</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Y&quot;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="DictUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DictUtil">[docs]</a><span class="k">class</span> <span class="nc">DictUtil</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility class for dictionary data</span>
+
+<span class="sd">        </span>
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DictUtil.isEmpty"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DictUtil.isEmpty">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">isEmpty</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns true if the value of the dictionary for the specified key is a null or empty string, zero-length array,</span>
+<span class="sd">            false otherwise.</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">hasKey</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+                
+
+<div class="viewcode-block" id="DictUtil.isNotEmpty"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DictUtil.isNotEmpty">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">isNotEmpty</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns true if the value of the dictionary for the specified key is not null and has value,</span>
+<span class="sd">            false otherwise.</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DictUtil.hasKey"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DictUtil.hasKey">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">hasKey</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">keyToFind</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns true if the dictionary has specified key,</span>
+<span class="sd">            false otherwise.</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">hasThisKey</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">keyToFind</span><span class="p">:</span>
+                <span class="n">hasThisKey</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">hasThisKey</span></div>
+
+
+<div class="viewcode-block" id="DictUtil.getBoolean"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DictUtil.getBoolean">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">getBoolean</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the value of the dictionary for the specified key as boolean type.</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">default</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Y&quot;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DictUtil.getString"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DictUtil.getString">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">getString</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the value of the dictionary for the specified key as string type.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">default</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DictUtil.getInteger"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DictUtil.getInteger">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">getInteger</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of the dictionary for the specified key as integer type.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">default</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="QWidgetUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.QWidgetUtil">[docs]</a><span class="k">class</span> <span class="nc">QWidgetUtil</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility class for QWidget</span>
+
+<span class="sd">        </span>
+<span class="sd">        Author</span>
+<span class="sd">        -----</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="QWidgetUtil.createComboBox"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.QWidgetUtil.createComboBox">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createComboBox</span><span class="p">(</span><span class="n">items</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span><span class="n">QWidget</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initValue</span><span class="p">:</span><span class="nb">any</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">currentTextChangedHandler</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QComboBox</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Creates new instance of the QComboBox.</span>
+
+
+<span class="sd">            Example</span>
+<span class="sd">            -------</span>
+<span class="sd">            &gt;&gt;&gt; combobox = QWidgetUtil.createComboBox(</span>
+<span class="sd">            &gt;&gt;&gt;     [&quot;post&quot;, &quot;get&quot;, &quot;put&quot;], initValue=s&quot;post&quot;, currentTextChangedHandler=self.currentTextChangedHandler</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># create QComboBox instance</span>
+        <span class="n">comboBox</span> <span class="o">=</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">QComboBox</span><span class="p">(),</span> <span class="n">QComboBox</span><span class="p">(</span><span class="n">parent</span><span class="p">))</span>
+
+        <span class="c1"># add items</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">comboBox</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="c1"># set initial value</span>
+        <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isNotEmpty</span><span class="p">(</span><span class="n">initValue</span><span class="p">):</span>
+           <span class="n">comboBox</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">initValue</span><span class="p">)</span>
+
+        <span class="c1"># set handler for currentTextChanged event</span>
+        <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isNotEmpty</span><span class="p">(</span><span class="n">currentTextChangedHandler</span><span class="p">):</span>
+            <span class="n">comboBox</span><span class="o">.</span><span class="n">currentTextChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">currentTextChangedHandler</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">comboBox</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># create QProgressDialog</span>
+    <span class="c1">#</span>
+<div class="viewcode-block" id="QWidgetUtil.createProgressDialog"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.QWidgetUtil.createProgressDialog">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createProgressDialog</span><span class="p">(</span><span class="n">minimum</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maximum</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">isModal</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QProgressDialog</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Creates new instance of QProgressDialog.</span>
+<span class="sd">            </span>
+<span class="sd">            Example</span>
+<span class="sd">            -------</span>
+<span class="sd">            &gt;&gt;&gt; progressDialog = QWidgetUtil.createProgressDialog(title=&quot;PLZ wait&quot;, label=&quot;In progress...&quot;, maximum=80)</span>
+<span class="sd">            &gt;&gt;&gt; progressDialog.show()</span>
+
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">progressDialog</span> <span class="o">=</span> <span class="n">QProgressDialog</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">)</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="n">setModal</span><span class="p">(</span><span class="n">isModal</span><span class="p">)</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="n">setCancelButton</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="n">setAutoClose</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">progressDialog</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="DatetimeUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil">[docs]</a><span class="k">class</span> <span class="nc">DatetimeUtil</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility class for datetime process</span>
+<span class="sd">        </span>
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch">[docs]</a>    <span class="k">class</span> <span class="nc">StopWatch</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            The StopWatch class including lap time function.</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;DEFAULT&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__label</span> <span class="o">=</span> <span class="n">label</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__stopTimeMs</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.start"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.start">[docs]</a>        <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Starts to run timer.</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.lap"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.lap">[docs]</a>        <span class="k">def</span> <span class="nf">lap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Marks the lap time.</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.stop"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.stop">[docs]</a>        <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Stops the timer/</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__stopTimeMs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.elapsed"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.elapsed">[docs]</a>        <span class="k">def</span> <span class="nf">elapsed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Returns the total elapsed time as milliseconds.</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__stopTimeMs</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span></div>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.lapCount"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.lapCount">[docs]</a>        <span class="k">def</span> <span class="nf">lapCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Returns the count of the marked lap time.</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.lapTime"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.lapTime">[docs]</a>        <span class="k">def</span> <span class="nf">lapTime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Returns the lap time for the specified order(index).</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="p">):</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span></div>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.getLabel"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.getLabel">[docs]</a>        <span class="k">def</span> <span class="nf">getLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Returns the label.</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__label</span></div>
+
+
+<div class="viewcode-block" id="DatetimeUtil.StopWatch.reset"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DatetimeUtil.StopWatch.reset">[docs]</a>        <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Resets all lap times and elapsed time to zero.</span>
+<span class="sd">                </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__stopTimeMs</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="PandasUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.PandasUtil">[docs]</a><span class="k">class</span> <span class="nc">PandasUtil</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility class to process pandas data</span>
+<span class="sd">    </span>
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PandasUtil.toDict"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.PandasUtil.toDict">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">toDict</span><span class="p">(</span><span class="n">series</span><span class="p">:</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Converts the row data as pandas Series to dictionary</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            --------</span>
+<span class="sd">            series: pandas Series data to convert</span>
+
+<span class="sd">            Examples</span>
+<span class="sd">            --------</span>
+<span class="sd">            &gt;&gt;&gt; data = [</span>
+<span class="sd">            &gt;&gt;&gt;     [&quot;a&quot;, 2, 7],</span>
+<span class="sd">            &gt;&gt;&gt;     [&quot;b&quot;, 5, 8],</span>
+<span class="sd">            &gt;&gt;&gt;     [&quot;c&quot;, 7, 8]</span>
+<span class="sd">            &gt;&gt;&gt; ]</span>
+<span class="sd">            &gt;&gt;&gt; df = pd.DataFrame(data=data, columns=[&quot;COL1&quot;, &quot;COL2&quot;, &quot;COL3&quot;])</span>
+
+<span class="sd">            &gt;&gt;&gt; for rowIndex in range(len(df)):</span>
+<span class="sd">            &gt;&gt;&gt;     print( PandasUtil.toDict(df.iloc[rowIndex]) )</span>
+
+<span class="sd">            &gt;&gt;&gt; `{&#39;COL1&#39;: &#39;a&#39;, &#39;COL2&#39;: 2, &#39;COL3&#39;: 7}`</span>
+<span class="sd">            &gt;&gt;&gt; `{&#39;COL1&#39;: &#39;b&#39;, &#39;COL2&#39;: 5, &#39;COL3&#39;: 8}`</span>
+<span class="sd">            &gt;&gt;&gt; `{&#39;COL1&#39;: &#39;c&#39;, &#39;COL2&#39;: 7, &#39;COL3&#39;: 8}`</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">dictData</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="n">dictData</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">dictData</span></div>
+
+
+<div class="viewcode-block" id="PandasUtil.toDictArray"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.PandasUtil.toDictArray">[docs]</a>    <span class="k">def</span> <span class="nf">toDictArray</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Converts pandas DataFrame data to array containing dictionary</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            --------</span>
+<span class="sd">            series: pandas Series data to convert</span>
+
+<span class="sd">            Examples</span>
+<span class="sd">            --------</span>
+<span class="sd">            &gt;&gt;&gt; data = [</span>
+<span class="sd">            &gt;&gt;&gt;     [&quot;a&quot;, 2, 7],</span>
+<span class="sd">            &gt;&gt;&gt;     [&quot;b&quot;, 5, 8],</span>
+<span class="sd">            &gt;&gt;&gt;     [&quot;c&quot;, 7, 8]</span>
+<span class="sd">            &gt;&gt;&gt; ]</span>
+
+<span class="sd">            &gt;&gt;&gt; df = pd.DataFrame(data=data, columns=[&quot;COL1&quot;, &quot;COL2&quot;, &quot;COL3&quot;])</span>
+
+<span class="sd">            &gt;&gt;&gt; print( PandasUtil.toDictArray(df) )</span>
+<span class="sd">            &gt;&gt;&gt; `[{&#39;COL1&#39;: &#39;a&#39;, &#39;COL2&#39;: 2, &#39;COL3&#39;: 7}, {&#39;COL1&#39;: &#39;b&#39;, &#39;COL2&#39;: 5, &#39;COL3&#39;: 8}, {&#39;COL1&#39;: &#39;c&#39;, &#39;COL2&#39;: 7, &#39;COL3&#39;: 8}]`</span>
+<span class="sd">            </span>
+<span class="sd">            Author</span>
+<span class="sd">            -----</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">dictArray</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">rowIndex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+            <span class="n">dictArray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PandasUtil</span><span class="o">.</span><span class="n">toDict</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">rowIndex</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">dictArray</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="JSONUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.JSONUtil">[docs]</a><span class="k">class</span> <span class="nc">JSONUtil</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility class to process JSON data.</span>
+<span class="sd">    </span>
+<span class="sd">        Author</span>
+<span class="sd">        --------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JSONUtil.toJSONString"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.JSONUtil.toJSONString">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">toJSONString</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">any</span><span class="p">,</span> <span class="n">beautify</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Converts data object to JSON string.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            --------</span>
+<span class="sd">            data: any</span>
+<span class="sd">                data object to convert</span>
+<span class="sd">            beautify: bool</span>
+<span class="sd">                whether to beautify result JSON string for pretty print</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            --------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JSONUtil.toDict"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.JSONUtil.toDict">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">toDict</span><span class="p">(</span><span class="n">jsonStr</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Converts JSON string to dictionary data.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            --------</span>
+<span class="sd">            jsonStr: str</span>
+<span class="sd">                JSON string to convert</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            --------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">jsonStr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JSONUtil.beautify"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.JSONUtil.beautify">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">beautify</span><span class="p">(</span><span class="n">jsonStr</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Beautifies JSON string</span>
+<span class="sd">            </span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            --------</span>
+<span class="sd">            jsonStr: str</span>
+<span class="sd">                JSON string to beautify</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            --------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">jsonStr</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div></div>
+
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    stopWatch = DatetimeUtil.StopWatch()</span>
+<span class="sd">    stopWatch.start()</span>
+
+<span class="sd">    data = numpy.loadtxt(&quot;./ratings.dat&quot;, delimiter=&quot;::&quot;, dtype=numpy.int64)</span>
+<span class="sd">    stopWatch.lap()</span>
+
+<span class="sd">    data = numpy.loadtxt(&quot;./ratings.dat&quot;, delimiter=&quot;::&quot;, dtype=numpy.int64)</span>
+<span class="sd">    stopWatch.lap()</span>
+
+<span class="sd">    data = numpy.loadtxt(&quot;./ratings.dat&quot;, delimiter=&quot;::&quot;, dtype=numpy.int64)</span>
+<span class="sd">    stopWatch.lap()</span>
+
+<span class="sd">    for i in range(stopWatch.lapCount()):</span>
+<span class="sd">        print(&quot;[&quot; + str(i) + &quot;]: &quot; + str(stopWatch.lapTime(i)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;1.FirstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Gildong&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;2.LastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Hong&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;3.Age&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> 
+        <span class="s2">&quot;4.University&quot;</span><span class="p">:</span> <span class="s2">&quot;UOS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;5.Courses&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Major&quot;</span><span class="p">:</span> <span class="s2">&quot;Statistics&quot;</span><span class="p">,</span> 
+                <span class="s2">&quot;Classes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Probability&quot;</span><span class="p">,</span> 
+                            <span class="s2">&quot;Generalized Linear Model&quot;</span><span class="p">,</span> 
+                            <span class="s2">&quot;Categorical Data Analysis&quot;</span><span class="p">]</span>
+            <span class="p">},</span> 
+            <span class="p">{</span>
+                <span class="s2">&quot;Minor&quot;</span><span class="p">:</span> <span class="s2">&quot;ComputerScience&quot;</span><span class="p">,</span> 
+                <span class="s2">&quot;Classes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Data Structure&quot;</span><span class="p">,</span> 
+                            <span class="s2">&quot;Programming&quot;</span><span class="p">,</span> 
+                            <span class="s2">&quot;Algorithms&quot;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+
+
+    <span class="n">jsonStr</span> <span class="o">=</span> <span class="n">JSONUtil</span><span class="o">.</span><span class="n">toJSONString</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">jsonStr</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="n">beautified</span> <span class="o">=</span> <span class="n">JSONUtil</span><span class="o">.</span><span class="n">beautify</span><span class="p">(</span><span class="n">jsonStr</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">beautified</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span> <span class="n">JSONUtil</span><span class="o">.</span><span class="n">toDict</span><span class="p">(</span><span class="n">beautified</span><span class="p">)</span> <span class="p">)</span>
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

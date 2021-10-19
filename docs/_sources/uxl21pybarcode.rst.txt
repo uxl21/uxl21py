@@ -1,0 +1,7 @@
+uxl21pybarcode module
+=====================
+
+.. automodule:: uxl21pybarcode
+   :members:
+   :undoc-members:
+   :show-inheritance:

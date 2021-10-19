@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uxl21pyqrcode module &mdash; uxl21py 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> uxl21py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">uxl21pyqrcode module</a><ul>
+<li><a class="reference internal" href="#author">Author</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">uxl21py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>uxl21pyqrcode module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/uxl21pyqrcode.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uxl21pyqrcode">
+<span id="uxl21pyqrcode-module"></span><h1>uxl21pyqrcode module<a class="headerlink" href="#module-uxl21pyqrcode" title="Permalink to this headline"></a></h1>
+<p>Copyright (c) 2021 uxl21 &lt;<a class="reference external" href="mailto:uxl21x&#37;&#52;&#48;gmail&#46;com">uxl21x<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+This file is a part of uxl21py</p>
+<section id="author">
+<h2>Author<a class="headerlink" href="#author" title="Permalink to this headline"></a></h2>
+<p>uxl21</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">uxl21pyqrcode.</span></span><span class="sig-name descname"><span class="pre">QRCodeImageConstants</span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#QRCodeImageConstants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines constants for QR code image commonly.
+Some constants are for QRCodeImageGenerator class and the others are for SimplePyQRCodeGenerator.</p>
+<p>uxl21</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.DEFAULT_BACKGROUND_COLOUR">
+<span class="sig-name descname"><span class="pre">DEFAULT_BACKGROUND_COLOUR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'#ffffff'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.DEFAULT_BACKGROUND_COLOUR" title="Permalink to this definition"></a></dt>
+<dd><p>Default version of the QR code.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.DEFAULT_FILL_COLOUR">
+<span class="sig-name descname"><span class="pre">DEFAULT_FILL_COLOUR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'#000000'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.DEFAULT_FILL_COLOUR" title="Permalink to this definition"></a></dt>
+<dd><p>Default background colour of the QR code.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_DEFAULT_SCALE">
+<span class="sig-name descname"><span class="pre">PYQRCODE_DEFAULT_SCALE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_DEFAULT_SCALE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_DEFAULT_VERSION">
+<span class="sig-name descname"><span class="pre">PYQRCODE_DEFAULT_VERSION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_DEFAULT_VERSION" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_H">
+<span class="sig-name descname"><span class="pre">PYQRCODE_ERROR_CORRECT_H</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'H'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_H" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_L">
+<span class="sig-name descname"><span class="pre">PYQRCODE_ERROR_CORRECT_L</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'L'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_L" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_M">
+<span class="sig-name descname"><span class="pre">PYQRCODE_ERROR_CORRECT_M</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'M'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_M" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_Q">
+<span class="sig-name descname"><span class="pre">PYQRCODE_ERROR_CORRECT_Q</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'Q'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_Q" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_EPS">
+<span class="sig-name descname"><span class="pre">PYQRCODE_IMAGE_TYPE_EPS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'eps'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_EPS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_PNG">
+<span class="sig-name descname"><span class="pre">PYQRCODE_IMAGE_TYPE_PNG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'png'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_PNG" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_SVG">
+<span class="sig-name descname"><span class="pre">PYQRCODE_IMAGE_TYPE_SVG</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'svg'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_SVG" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_XBM">
+<span class="sig-name descname"><span class="pre">PYQRCODE_IMAGE_TYPE_XBM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'xbm'</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_XBM" title="Permalink to this definition"></a></dt>
+<dd><p>Default scale value for the QR code image created by SimplePyQRCodeImageGenerator class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.QRCODE_DEFAULT_BORDER">
+<span class="sig-name descname"><span class="pre">QRCODE_DEFAULT_BORDER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.QRCODE_DEFAULT_BORDER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.QRCODE_DEFAULT_BOX_SIZE">
+<span class="sig-name descname"><span class="pre">QRCODE_DEFAULT_BOX_SIZE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.QRCODE_DEFAULT_BOX_SIZE" title="Permalink to this definition"></a></dt>
+<dd><p>Default border of the QR code.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.QRCODE_DEFAULT_VERSION">
+<span class="sig-name descname"><span class="pre">QRCODE_DEFAULT_VERSION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.QRCODE_DEFAULT_VERSION" title="Permalink to this definition"></a></dt>
+<dd><p>Default box size of the QR code.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_H">
+<span class="sig-name descname"><span class="pre">QRCODE_ERROR_CORRECT_H</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_H" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_L">
+<span class="sig-name descname"><span class="pre">QRCODE_ERROR_CORRECT_L</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_L" title="Permalink to this definition"></a></dt>
+<dd><p>Default version of the QR code.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_M">
+<span class="sig-name descname"><span class="pre">QRCODE_ERROR_CORRECT_M</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_M" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_Q">
+<span class="sig-name descname"><span class="pre">QRCODE_ERROR_CORRECT_Q</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageConstants.QRCODE_ERROR_CORRECT_Q" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageGenerator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">uxl21pyqrcode.</span></span><span class="sig-name descname"><span class="pre">QRCodeImageGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uxl21pyqrcode.html#QRCodeImageGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageGenerator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class generates QR code image.</p>
+<p>uxl21</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageGenerator.addData">
+<span class="sig-name descname"><span class="pre">addData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#QRCodeImageGenerator.addData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageGenerator.addData" title="Permalink to this definition"></a></dt>
+<dd><p>Adds QR code data.</p>
+<dl class="simple">
+<dt>data: any</dt><dd><p>data to add</p>
+</dd>
+</dl>
+<p>uxl21</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageGenerator.clearData">
+<span class="sig-name descname"><span class="pre">clearData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#QRCodeImageGenerator.clearData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageGenerator.clearData" title="Permalink to this definition"></a></dt>
+<dd><p>Clears all data.</p>
+<p>uxl21</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageGenerator.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PNG'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#QRCodeImageGenerator.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageGenerator.generate" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the QR code image file.</p>
+<dl class="simple">
+<dt>path: str</dt><dd><p>Absolute path including file name and extension.</p>
+</dd>
+<dt>type: str</dt><dd><p>Image file type. Default is ‘PNG’.</p>
+</dd>
+</dl>
+<p>uxl21</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uxl21pyqrcode.QRCodeImageGenerator.setColours">
+<span class="sig-name descname"><span class="pre">setColours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#QRCodeImageGenerator.setColours"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.QRCodeImageGenerator.setColours" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the fill and background colours.
+The colour value should be a hex code or a string representing colours.</p>
+<dl class="simple">
+<dt>kargs: dict</dt><dd><p>the dictionary data containing ‘fillColour’ and ‘backgroundColour’ attributes.</p>
+</dd>
+</dl>
+<p>uxl21</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uxl21pyqrcode.SimplePyQRCodeGenerator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">uxl21pyqrcode.</span></span><span class="sig-name descname"><span class="pre">SimplePyQRCodeGenerator</span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#SimplePyQRCodeGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.SimplePyQRCodeGenerator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class generates QR code image with string data simply.</p>
+<p>uxl21</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uxl21pyqrcode.SimplePyQRCodeGenerator.generate">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qrCodeData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#SimplePyQRCodeGenerator.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.SimplePyQRCodeGenerator.generate" title="Permalink to this definition"></a></dt>
+<dd><p>Generates QR code image with string data and some configurations.</p>
+<dl class="simple">
+<dt>qrCodeData: str</dt><dd><p>string data</p>
+</dd>
+<dt>path: str</dt><dd><p>Absolute path including file name and extension.</p>
+</dd>
+<dt>type: str</dt><dd><ul class="simple">
+<li><p>QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_PNG (Default)</p></li>
+<li><p>QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_SVG</p></li>
+<li><p>QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_EPS</p></li>
+<li><p>QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_XBM</p></li>
+</ul>
+</dd>
+<dt>kargs: dict</dt><dd><ul class="simple">
+<li><p>version: QR code version between 1 and 40. Default is QRCodeImageConstants.PYQRCODE_DEFAULT_VERSION(10)</p></li>
+<li><p>encoding: encoding of the string data. Default is utf-8.</p></li>
+<li><p>scale: QR code image’s scale. Default is QRCodeImageConstants.PYQRCODE_DEFAULT_SCALE(2).</p></li>
+<li><dl class="simple">
+<dt>errorCorrection: Error correction</dt><dd><ul>
+<li><p>QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_H</p></li>
+<li><p>QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_Q</p></li>
+<li><p>QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_M (Default)</p></li>
+<li><p>QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_L</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>uxl21</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uxl21pyqrcode.SimpleQRCodeImageReader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">uxl21pyqrcode.</span></span><span class="sig-name descname"><span class="pre">SimpleQRCodeImageReader</span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#SimpleQRCodeImageReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.SimpleQRCodeImageReader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class reads QR code data from image file simply.</p>
+<p>uxl21</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uxl21pyqrcode.SimpleQRCodeImageReader.read">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="reference internal" href="_modules/uxl21pyqrcode.html#SimpleQRCodeImageReader.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyqrcode.SimpleQRCodeImageReader.read" title="Permalink to this definition"></a></dt>
+<dd><p>Reads QR code data from image file.</p>
+<dl class="simple">
+<dt>input: str</dt><dd><p>The absolute path of the image file to read</p>
+</dd>
+</dl>
+<p>uxl21</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

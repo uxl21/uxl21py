@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uxl21pyqrcode &mdash; uxl21py 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> uxl21py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">uxl21py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>uxl21pyqrcode</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uxl21pyqrcode</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;</span>
+<span class="sd">    This file is a part of uxl21py</span>
+
+<span class="sd">    </span>
+<span class="sd">    Author</span>
+<span class="sd">    -----</span>
+<span class="sd">    uxl21</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">encode</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setcheckinterval</span><span class="p">,</span> <span class="n">version</span>
+
+<span class="kn">from</span> <span class="nn">qrcode</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">uxl21pyutil</span> <span class="kn">import</span> <span class="n">DataUtil</span><span class="p">,</span> <span class="n">DictUtil</span>
+<span class="kn">import</span> <span class="nn">pyqrcode</span>
+<span class="kn">from</span> <span class="nn">qrcode.main</span> <span class="kn">import</span> <span class="n">QRCode</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<div class="viewcode-block" id="QRCodeImageConstants"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.QRCodeImageConstants">[docs]</a><span class="k">class</span> <span class="nc">QRCodeImageConstants</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class defines constants for QR code image commonly.</span>
+<span class="sd">        Some constants are for QRCodeImageGenerator class and the others are for SimplePyQRCodeGenerator.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default fill colour of the QR code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DEFAULT_FILL_COLOUR</span> <span class="o">=</span> <span class="s2">&quot;#000000&quot;</span>    <span class="c1"># &quot;#2e4e96&quot;</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default background colour of the QR code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DEFAULT_BACKGROUND_COLOUR</span> <span class="o">=</span> <span class="s2">&quot;#ffffff&quot;</span>
+
+
+    <span class="c1"># for QRCodeImageGenerator class</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default version of the QR code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">QRCODE_DEFAULT_VERSION</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default box size of the QR code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">QRCODE_DEFAULT_BOX_SIZE</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default border of the QR code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">QRCODE_DEFAULT_BORDER</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="n">QRCODE_ERROR_CORRECT_H</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ERROR_CORRECT_H</span>
+    <span class="n">QRCODE_ERROR_CORRECT_Q</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ERROR_CORRECT_Q</span>
+    <span class="n">QRCODE_ERROR_CORRECT_M</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ERROR_CORRECT_M</span>
+    <span class="n">QRCODE_ERROR_CORRECT_L</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ERROR_CORRECT_L</span>
+
+
+    <span class="c1"># for SimplePyQRCodeGenerator class</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default version of the QR code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">PYQRCODE_DEFAULT_VERSION</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="n">PYQRCODE_ERROR_CORRECT_H</span> <span class="o">=</span> <span class="s2">&quot;H&quot;</span>
+    <span class="n">PYQRCODE_ERROR_CORRECT_Q</span> <span class="o">=</span> <span class="s2">&quot;Q&quot;</span>
+    <span class="n">PYQRCODE_ERROR_CORRECT_M</span> <span class="o">=</span> <span class="s2">&quot;M&quot;</span>
+    <span class="n">PYQRCODE_ERROR_CORRECT_L</span> <span class="o">=</span> <span class="s2">&quot;L&quot;</span>
+
+    <span class="n">PYQRCODE_IMAGE_TYPE_PNG</span> <span class="o">=</span> <span class="s2">&quot;png&quot;</span>
+    <span class="n">PYQRCODE_IMAGE_TYPE_SVG</span> <span class="o">=</span> <span class="s2">&quot;svg&quot;</span>
+    <span class="n">PYQRCODE_IMAGE_TYPE_EPS</span> <span class="o">=</span> <span class="s2">&quot;eps&quot;</span>
+    <span class="n">PYQRCODE_IMAGE_TYPE_XBM</span> <span class="o">=</span> <span class="s2">&quot;xbm&quot;</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default scale value for the QR code image created by SimplePyQRCodeImageGenerator class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">PYQRCODE_DEFAULT_SCALE</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+
+<div class="viewcode-block" id="QRCodeImageGenerator"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.QRCodeImageGenerator">[docs]</a><span class="k">class</span> <span class="nc">QRCodeImageGenerator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class generates QR code image.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -----</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Constructor</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            kargs: dict</span>
+<span class="sd">                - version: QR code version between 1 and 40. Default is QRCodeImageConstants.QRCODE_DEFAULT_VERSION(1)</span>
+<span class="sd">                - errorCorrection: Error correction</span>
+<span class="sd">                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_H</span>
+<span class="sd">                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_Q</span>
+<span class="sd">                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_M</span>
+<span class="sd">                    - QRCodeImageConstants.QRCODE_ERROR_CORRECT_L</span>
+<span class="sd">                - boxSize: Box size. Default is QRCodeImageConstants.DEFAULT_BOX_SIZE(10)</span>
+<span class="sd">                - border: Border size. Default is QRCodeImageConstants.DEFAULT_BORDER(4)</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">QRCODE_DEFAULT_VERSION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errorCorrection</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;errorCorrection&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">QRCODE_ERROR_CORRECT_M</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxSize</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;boxSize&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">QRCODE_DEFAULT_BOX_SIZE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">border</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;border&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">QRCODE_DEFAULT_BORDER</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fillColour</span> <span class="o">=</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">DEFAULT_FILL_COLOUR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backgroundColour</span> <span class="o">=</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">DEFAULT_BACKGROUND_COLOUR</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">qr</span> <span class="o">=</span> <span class="n">QRCode</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="n">error_correction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">errorCorrection</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boxSize</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">border</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="QRCodeImageGenerator.setColours"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.QRCodeImageGenerator.setColours">[docs]</a>    <span class="k">def</span> <span class="nf">setColours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the fill and background colours.</span>
+<span class="sd">            The colour value should be a hex code or a string representing colours.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            kargs: dict</span>
+<span class="sd">                the dictionary data containing &#39;fillColour&#39; and &#39;backgroundColour&#39; attributes.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">isNotEmpty</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;fillColour&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fillColour</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;fillColour&quot;</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">isNotEmpty</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;backgroundColour&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backgroundColour</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;backgroundColour&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QRCodeImageGenerator.addData"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.QRCodeImageGenerator.addData">[docs]</a>    <span class="k">def</span> <span class="nf">addData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Adds QR code data.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            data: any</span>
+<span class="sd">                data to add</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isNotEmpty</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qr</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QRCodeImageGenerator.clearData"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.QRCodeImageGenerator.clearData">[docs]</a>    <span class="k">def</span> <span class="nf">clearData</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Clears all data.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">qr</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QRCodeImageGenerator.generate"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.QRCodeImageGenerator.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Generates the QR code image file.</span>
+<span class="sd">            </span>
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            path: str</span>
+<span class="sd">                Absolute path including file name and extension.</span>
+<span class="sd">            type: str</span>
+<span class="sd">                Image file type. Default is &#39;PNG&#39;.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fillColour</span><span class="p">,</span> <span class="n">back_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">backgroundColour</span><span class="p">)</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span></div></div>
+
+
+
+<div class="viewcode-block" id="SimplePyQRCodeGenerator"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.SimplePyQRCodeGenerator">[docs]</a><span class="k">class</span> <span class="nc">SimplePyQRCodeGenerator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class generates QR code image with string data simply.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimplePyQRCodeGenerator.generate"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.SimplePyQRCodeGenerator.generate">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">qrCodeData</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Generates QR code image with string data and some configurations.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            qrCodeData: str</span>
+<span class="sd">                string data</span>
+
+<span class="sd">            path: str</span>
+<span class="sd">                Absolute path including file name and extension.</span>
+
+<span class="sd">            type: str</span>
+<span class="sd">                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_PNG (Default)</span>
+<span class="sd">                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_SVG</span>
+<span class="sd">                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_EPS</span>
+<span class="sd">                - QRCodeImageConstants.PYQRCODE_IMAGE_TYPE_XBM</span>
+
+<span class="sd">            kargs: dict</span>
+<span class="sd">                - version: QR code version between 1 and 40. Default is QRCodeImageConstants.PYQRCODE_DEFAULT_VERSION(10)</span>
+<span class="sd">                - encoding: encoding of the string data. Default is utf-8.</span>
+<span class="sd">                - scale: QR code image&#39;s scale. Default is QRCodeImageConstants.PYQRCODE_DEFAULT_SCALE(2).</span>
+<span class="sd">                - errorCorrection: Error correction</span>
+<span class="sd">                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_H</span>
+<span class="sd">                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_Q</span>
+<span class="sd">                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_M (Default)</span>
+<span class="sd">                    - QRCodeImageConstants.PYQRCODE_ERROR_CORRECT_L</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">type</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_IMAGE_TYPE_PNG</span><span class="p">)</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_DEFAULT_VERSION</span><span class="p">)</span>
+        <span class="n">errorCorrection</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;errorCorrection&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_ERROR_CORRECT_M</span><span class="p">)</span>
+        <span class="n">encode</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;scale&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_DEFAULT_SCALE</span><span class="p">)</span>
+        <span class="n">moduleColour</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;fillColour&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">DEFAULT_FILL_COLOUR</span><span class="p">)</span>
+        <span class="n">backgroundColour</span> <span class="o">=</span> <span class="n">DictUtil</span><span class="o">.</span><span class="n">getInteger</span><span class="p">(</span><span class="n">kargs</span><span class="p">,</span> <span class="s2">&quot;backgroundColour&quot;</span><span class="p">,</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">DEFAULT_BACKGROUND_COLOUR</span><span class="p">)</span>
+
+        <span class="n">qr</span> <span class="o">=</span> <span class="n">pyqrcode</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">qrCodeData</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">errorCorrection</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encode</span><span class="p">)</span>
+        <span class="n">loweredType</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">loweredType</span> <span class="o">==</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_IMAGE_TYPE_PNG</span><span class="p">:</span>
+            <span class="n">callMethod</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">png</span>
+        <span class="k">elif</span> <span class="n">loweredType</span> <span class="o">==</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_IMAGE_TYPE_SVG</span><span class="p">:</span>
+            <span class="n">callMethod</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">svg</span>
+        <span class="k">elif</span> <span class="n">loweredType</span> <span class="o">==</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_IMAGE_TYPE_EPS</span><span class="p">:</span>
+            <span class="n">callMethod</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">eps</span>
+        <span class="k">elif</span> <span class="n">loweredType</span> <span class="o">==</span> <span class="n">QRCodeImageConstants</span><span class="o">.</span><span class="n">PYQRCODE_IMAGE_TYPE_XBM</span><span class="p">:</span>
+            <span class="n">callMethod</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">xbm</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">callMethod</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">png</span>
+
+        <span class="n">callMethod</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">module_color</span><span class="o">=</span><span class="n">moduleColour</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">backgroundColour</span><span class="p">)</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="SimpleQRCodeImageReader"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.SimpleQRCodeImageReader">[docs]</a><span class="k">class</span> <span class="nc">SimpleQRCodeImageReader</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class reads QR code data from image file simply.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimpleQRCodeImageReader.read"><a class="viewcode-back" href="../uxl21pyqrcode.html#uxl21pyqrcode.SimpleQRCodeImageReader.read">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Reads QR code data from image file.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            input: str</span>
+<span class="sd">                The absolute path of the image file to read</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">qrCodeImg</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        <span class="n">detector</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">QRCodeDetector</span><span class="p">()</span>
+        <span class="n">resultData</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">detector</span><span class="o">.</span><span class="n">detectAndDecode</span><span class="p">(</span><span class="n">qrCodeImg</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">resultData</span></div></div>
+    
+
+
+
+<span class="c1">#if __name__ == &quot;__main__&quot;:</span>
+    <span class="c1"># cap = cv2.VideoCapture(0)</span>
+
+    <span class="c1"># if cap.isOpened():</span>
+    <span class="c1">#     detector = cv2.QRCodeDetector()</span>
+
+    <span class="c1">#     while True:</span>
+    <span class="c1">#         _, img = cap.read()</span>
+    <span class="c1">#         data, bbox, _ = detector.detectAndDecode(img)</span>
+
+    <span class="c1">#         if DataUtil.isNotEmpty(data):</span>
+    <span class="c1">#             print(&quot;QR code data = \n&quot;, data)</span>
+
+    <span class="c1">#         cv2.imshow(&quot;img&quot;, img)</span>
+
+    <span class="c1">#         if cv2.waitKey(1) == ord(&quot;q&quot;):</span>
+    <span class="c1">#             break</span>
+
+    <span class="c1">#     cap.release()</span>
+    <span class="c1">#     cv2.destroyAllWindows()</span>
+
+    <span class="c1"># else:</span>
+    <span class="c1">#     raise Exception(&quot;No available camera&quot;)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

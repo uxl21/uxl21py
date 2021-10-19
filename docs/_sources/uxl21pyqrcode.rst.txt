@@ -1,0 +1,7 @@
+uxl21pyqrcode module
+====================
+
+.. automodule:: uxl21pyqrcode
+   :members:
+   :undoc-members:
+   :show-inheritance:

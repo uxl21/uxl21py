@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uxl21pybarcode &mdash; uxl21py 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> uxl21py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">uxl21py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>uxl21pybarcode</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uxl21pybarcode</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;</span>
+<span class="sd">    This file is a part of uxl21py</span>
+
+<span class="sd">    </span>
+<span class="sd">    Author</span>
+<span class="sd">    -----</span>
+<span class="sd">    uxl21</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">PIL.Image</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">barcode</span>
+<span class="kn">from</span> <span class="nn">barcode.writer</span> <span class="kn">import</span> <span class="n">ImageWriter</span>
+<span class="kn">from</span> <span class="nn">pyzbar</span> <span class="kn">import</span> <span class="n">pyzbar</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<div class="viewcode-block" id="BarcodeFormat"><a class="viewcode-back" href="../uxl21pybarcode.html#uxl21pybarcode.BarcodeFormat">[docs]</a><span class="k">class</span> <span class="nc">BarcodeFormat</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class define the barcode formats.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">EAN</span> <span class="o">=</span> <span class="s2">&quot;ean&quot;</span>
+    <span class="n">EAN8</span> <span class="o">=</span> <span class="s2">&quot;ean8&quot;</span>
+    <span class="n">EAN13</span> <span class="o">=</span> <span class="s2">&quot;ean13&quot;</span>
+    <span class="n">EAN14</span> <span class="o">=</span> <span class="s2">&quot;ean14&quot;</span>
+    <span class="n">GTIN</span> <span class="o">=</span> <span class="s2">&quot;gtin&quot;</span>
+    <span class="n">JAN</span> <span class="o">=</span> <span class="s2">&quot;jan&quot;</span>
+    <span class="n">UPC</span> <span class="o">=</span> <span class="s2">&quot;upc&quot;</span>
+    <span class="n">UPCA</span> <span class="o">=</span> <span class="s2">&quot;upca&quot;</span>
+    <span class="n">ISBN</span> <span class="o">=</span> <span class="s2">&quot;isbn&quot;</span>
+    <span class="n">ISBN10</span> <span class="o">=</span> <span class="s2">&quot;isbn10&quot;</span>
+    <span class="n">ISBN13</span> <span class="o">=</span> <span class="s2">&quot;isbn13&quot;</span>
+    <span class="n">ISSN</span> <span class="o">=</span> <span class="s2">&quot;issn&quot;</span>
+    <span class="n">CODE39</span> <span class="o">=</span> <span class="s2">&quot;code39&quot;</span>
+    <span class="n">CODE128</span> <span class="o">=</span> <span class="s2">&quot;code128&quot;</span>
+    <span class="n">PZN</span> <span class="o">=</span> <span class="s2">&quot;pzn&quot;</span>
+    <span class="n">ITF</span> <span class="o">=</span> <span class="s2">&quot;itf&quot;</span>
+    <span class="n">GS1</span> <span class="o">=</span> <span class="s2">&quot;gs1&quot;</span>
+    <span class="n">GS1_128</span> <span class="o">=</span> <span class="s2">&quot;gs1_128&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="BarcodeImageGenerator"><a class="viewcode-back" href="../uxl21pybarcode.html#uxl21pybarcode.BarcodeImageGenerator">[docs]</a><span class="k">class</span> <span class="nc">BarcodeImageGenerator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class generates barcode image file.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">barcodeFormat</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Constructor</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            barcodeFormat: str</span>
+<span class="sd">                Barcode format defined in BarcodeFormat class.</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">barcodeFormat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">barcodeWriter</span> <span class="o">=</span> <span class="n">barcode</span><span class="o">.</span><span class="n">get_barcode_class</span><span class="p">(</span><span class="n">barcodeFormat</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imageWriter</span> <span class="o">=</span> <span class="n">ImageWriter</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="BarcodeImageGenerator.generate"><a class="viewcode-back" href="../uxl21pybarcode.html#uxl21pybarcode.BarcodeImageGenerator.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">barcodeData</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Generates a barcode image file with data.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            barcodeData: str</span>
+<span class="sd">                Barcode data</span>
+<span class="sd">            path: str</span>
+<span class="sd">                File&#39;s path to save</span>
+<span class="sd">            title: str</span>
+<span class="sd">                Barcode image title and it will be file name</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            The absolute name with path of the saved image file</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">barcodeObj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">barcodeWriter</span><span class="p">(</span><span class="n">barcodeData</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imageWriter</span><span class="p">)</span>
+        <span class="n">fileName</span> <span class="o">=</span> <span class="n">title</span> <span class="k">if</span> <span class="p">(</span><span class="n">title</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;barcode_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span>
+        <span class="n">barcodeImageFile</span> <span class="o">=</span> <span class="n">barcodeObj</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">fileName</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">barcodeImageFile</span></div>
+
+
+<div class="viewcode-block" id="BarcodeImageGenerator.write"><a class="viewcode-back" href="../uxl21pybarcode.html#uxl21pybarcode.BarcodeImageGenerator.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">barcodeData</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">filePath</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Writes a barcode image file with data.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            barcodeData: str</span>
+<span class="sd">                Barcode data</span>
+<span class="sd">            filePath: str</span>
+<span class="sd">                The absolute path of the barcode image file to save including name and extension</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">barcodeObj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">barcodeWriter</span><span class="p">(</span><span class="n">barcodeData</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imageWriter</span><span class="p">)</span>
+        <span class="n">barcodeObj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="SimpleBarcodeImageReader"><a class="viewcode-back" href="../uxl21pybarcode.html#uxl21pybarcode.SimpleBarcodeImageReader">[docs]</a><span class="k">class</span> <span class="nc">SimpleBarcodeImageReader</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class reads barcode data from image file simply.</span>
+
+<span class="sd">        Author</span>
+<span class="sd">        -------</span>
+<span class="sd">        uxl21</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimpleBarcodeImageReader.read"><a class="viewcode-back" href="../uxl21pybarcode.html#uxl21pybarcode.SimpleBarcodeImageReader.read">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Reads barcode data from image file.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            -------</span>
+<span class="sd">            input: str</span>
+<span class="sd">                The absolute path of the image file to read</span>
+<span class="sd">            encoding: str</span>
+<span class="sd">                Encoding for barcode data. Default is &#39;utf-8&#39;</span>
+
+<span class="sd">            Author</span>
+<span class="sd">            -------</span>
+<span class="sd">            uxl21</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        <span class="n">barcode</span> <span class="o">=</span> <span class="n">pyzbar</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="kc">None</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">barcode</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">barcode</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">decodedData</span> <span class="o">=</span> <span class="n">barcode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">decodedData</span><span class="o">.</span><span class="n">type</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">decodedData</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
