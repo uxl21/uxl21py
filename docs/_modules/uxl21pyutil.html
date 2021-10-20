@@ -61,15 +61,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for uxl21pyutil</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;</span>
-<span class="sd">    This file is a part of uxl21py</span>
-
-<span class="sd">    </span>
-<span class="sd">    Author</span>
-<span class="sd">    -------</span>
-<span class="sd">    uxl21</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="c1">##################################################</span>
+<span class="c1">#   Copyright (c) 2021 uxl21 &lt;uxl21x@gmail.com&gt;</span>
+<span class="c1">#   This file is a part of uxl21py</span>
+<span class="c1"># </span>
+<span class="c1">#   Author: uxl21</span>
+<span class="c1">##################################################</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -83,11 +80,10 @@
 
 <div class="viewcode-block" id="ListUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.ListUtil">[docs]</a><span class="k">class</span> <span class="nc">ListUtil</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Utility class for list(array).</span>
+<span class="sd">        This utility class supports the features relating to list and array.</span>
 
-<span class="sd">        Author</span>
-<span class="sd">        -------</span>
-<span class="sd">        uxl21</span>
+<span class="sd">        Author:</span>
+<span class="sd">            uxl21</span>
 <span class="sd">    &quot;&quot;&quot;</span> 
 
 <div class="viewcode-block" id="ListUtil.filterList"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.ListUtil.filterList">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -95,43 +91,40 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Filters list items with their property name and value.</span>
 
-<span class="sd">            Parameters</span>
-<span class="sd">            -------</span>
-<span class="sd">            list: list</span>
-<span class="sd">                Original data list</span>
-<span class="sd">            prop: str</span>
-<span class="sd">                Property name of the item to filter</span>
-<span class="sd">            filterValue: Any</span>
-<span class="sd">                Property&#39;s value of the item to filter</span>
+<span class="sd">            Parameters:</span>
+<span class="sd">                list : list</span>
+<span class="sd">                    Original data list</span>
+<span class="sd">                prop : str</span>
+<span class="sd">                    Property name of the item to filter</span>
+<span class="sd">                filterValue : Any</span>
+<span class="sd">                    Property&#39;s value of the item to filter</span>
 
-<span class="sd">            Returns</span>
-<span class="sd">            -------</span>
-<span class="sd">            list</span>
-<span class="sd">                Contains filtered items</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                list</span>
+<span class="sd">                    Contains filtered items</span>
 
-<span class="sd">            Examples</span>
-<span class="sd">            -------</span>
-<span class="sd">            &gt;&gt;&gt; list = [</span>
-<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;A01&quot;, &quot;type&quot;: &quot;api&quot; },</span>
-<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;B11&quot;, &quot;type&quot;: &quot;pos&quot; },</span>
-<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;B12&quot;, &quot;type&quot;: &quot;pos&quot; },</span>
-<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;C07&quot;, &quot;type&quot;: &quot;backoffice&quot; },</span>
-<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;D08&quot;, &quot;type&quot;: &quot;api&quot; },</span>
-<span class="sd">            &gt;&gt;&gt;    { &quot;code&quot;: &quot;S21&quot;, &quot;type&quot;: &quot;backoffice&quot; }</span>
-<span class="sd">            &gt;&gt;&gt; ]</span>
-<span class="sd">            &gt;&gt;&gt; filteredList = ListUtil.filterList(list, &quot;type&quot;, &quot;api&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; print(filteredList)</span>
-<span class="sd">            &gt;&gt;&gt; ```</span>
-<span class="sd">            &gt;&gt;&gt; [</span>
-<span class="sd">            &gt;&gt;&gt;     { &quot;code&quot;: &quot;A01&quot;, &quot;type&quot;: &quot;api&quot; },</span>
-<span class="sd">            &gt;&gt;&gt;     { &quot;code&quot;: &quot;D08&quot;, &quot;type&quot;: &quot;api&quot; }</span>
-<span class="sd">            &gt;&gt;&gt; ]</span>
-<span class="sd">            &gt;&gt;&gt; ```</span>
+<span class="sd">            Examples:</span>
+<span class="sd">                &gt;&gt;&gt; list = [</span>
+<span class="sd">                &gt;&gt;&gt;    { &quot;code&quot;: &quot;A01&quot;, &quot;type&quot;: &quot;api&quot; },</span>
+<span class="sd">                &gt;&gt;&gt;    { &quot;code&quot;: &quot;B11&quot;, &quot;type&quot;: &quot;pos&quot; },</span>
+<span class="sd">                &gt;&gt;&gt;    { &quot;code&quot;: &quot;B12&quot;, &quot;type&quot;: &quot;pos&quot; },</span>
+<span class="sd">                &gt;&gt;&gt;    { &quot;code&quot;: &quot;C07&quot;, &quot;type&quot;: &quot;backoffice&quot; },</span>
+<span class="sd">                &gt;&gt;&gt;    { &quot;code&quot;: &quot;D08&quot;, &quot;type&quot;: &quot;api&quot; },</span>
+<span class="sd">                &gt;&gt;&gt;    { &quot;code&quot;: &quot;S21&quot;, &quot;type&quot;: &quot;backoffice&quot; }</span>
+<span class="sd">                &gt;&gt;&gt; ]</span>
+<span class="sd">                &gt;&gt;&gt; filteredList = ListUtil.filterList(list, &quot;type&quot;, &quot;api&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; print(filteredList)</span>
+<span class="sd">                &gt;&gt;&gt; ```</span>
+<span class="sd">                &gt;&gt;&gt; [</span>
+<span class="sd">                &gt;&gt;&gt;     { &quot;code&quot;: &quot;A01&quot;, &quot;type&quot;: &quot;api&quot; },</span>
+<span class="sd">                &gt;&gt;&gt;     { &quot;code&quot;: &quot;D08&quot;, &quot;type&quot;: &quot;api&quot; }</span>
+<span class="sd">                &gt;&gt;&gt; ]</span>
+<span class="sd">                &gt;&gt;&gt; ```</span>
 
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">numpy</span><span class="o">.</span><span class="n">array</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="o">!=</span> <span class="n">filterValue</span><span class="p">]</span></div>
 
@@ -139,23 +132,20 @@
 <div class="viewcode-block" id="ListUtil.getMax"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.ListUtil.getMax">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">getMax</span><span class="p">(</span><span class="nb">list</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Returns the greatest value among array&#39;s item with its property name.</span>
+<span class="sd">            Returns the greatest value among items of the array corresponding to its property name.</span>
 
-<span class="sd">            Parameters</span>
-<span class="sd">            -------</span>
-<span class="sd">            list: list</span>
-<span class="sd">                List to calculate max value</span>
-<span class="sd">            prop: any</span>
-<span class="sd">                Item&#39;s property name</span>
+<span class="sd">            Parameters:</span>
+<span class="sd">                list : list</span>
+<span class="sd">                    List to calculate max value</span>
+<span class="sd">                prop : any</span>
+<span class="sd">                    Item&#39;s property name</span>
 
-<span class="sd">            Returns</span>
-<span class="sd">            -------</span>
-<span class="sd">            any</span>
-<span class="sd">                The maximum value</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                any</span>
+<span class="sd">                    The maximum value</span>
 
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
@@ -169,11 +159,10 @@
 
 <div class="viewcode-block" id="DataUtil"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil">[docs]</a><span class="k">class</span> <span class="nc">DataUtil</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Utility class for general data process.</span>
+<span class="sd">        This utility class supports the features relating to the general data process.</span>
 <span class="sd">        </span>
-<span class="sd">        Author</span>
-<span class="sd">        -----</span>
-<span class="sd">        uxl21</span>
+<span class="sd">        Author:</span>
+<span class="sd">            uxl21</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="DataUtil.isEmpty"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.isEmpty">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -181,10 +170,19 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Returns true if the value is null or empty string, zero-length array,</span>
 <span class="sd">            false otherwise.</span>
+
+<span class="sd">            Parameters:</span>
+<span class="sd">                value : any</span>
+<span class="sd">                    The value to check</span>
+<span class="sd">                trim : bool</span>
+<span class="sd">                    Whether trim the value before check. The default is False.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                bool</span>
+<span class="sd">                    Whether the value is null or empty such as an empty string and zero-length array, etc.</span>
 <span class="sd">            </span>
-<span class="sd">            Author</span>
-<span class="sd">            -----</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># check None</span>
@@ -208,12 +206,11 @@
 <div class="viewcode-block" id="DataUtil.isNotEmpty"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.isNotEmpty">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">isNotEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Returns true if the value is not null and has value,</span>
+<span class="sd">            Returns true if the value is not null and has value, </span>
 <span class="sd">            false otherwise.</span>
 <span class="sd">            </span>
-<span class="sd">            Author</span>
-<span class="sd">            -----</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="ow">not</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
@@ -243,9 +240,8 @@
 <span class="sd">            Returns the default value if the value is empty(DataUtil.isEmpty(value) is true),</span>
 <span class="sd">            original value otherwise.</span>
 <span class="sd">            </span>
-<span class="sd">            Author</span>
-<span class="sd">            -----</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -259,33 +255,53 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Returns &#39;trueValue&#39; if the given condition is True, &#39;falseValue&#39; otherwise.</span>
 <span class="sd">            </span>
-<span class="sd">            Author</span>
-<span class="sd">            -----</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Parameters:</span>
+<span class="sd">                condition : bool</span>
+<span class="sd">                    Condition to check</span>
+<span class="sd">                trueValue : any</span>
+<span class="sd">                    Condition is true, returns this value</span>
+<span class="sd">                falseValue : any</span>
+<span class="sd">                    Condition is false, returns this value</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                any</span>
+<span class="sd">                    The corresponding value</span>
+
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="n">trueValue</span> <span class="k">if</span> <span class="n">condition</span> <span class="k">else</span> <span class="n">falseValue</span></div>
 
 
 <div class="viewcode-block" id="DataUtil.decode"><a class="viewcode-back" href="../uxl21pyutil.html#uxl21pyutil.DataUtil.decode">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nb">any</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            &#39;decode()&#39; function just like Oracle DECODE()</span>
+<span class="sd">            </span>
+<span class="sd">            Parameters:</span>
+<span class="sd">                value : any</span>
+<span class="sd">                    Value to check                </span>
+
+<span class="sd">                *args</span>
+<span class="sd">                    Values to be compared with the first value and be returned</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                any</span>
+<span class="sd">                    The corresponding value among the given arguments.</span>
 
 <span class="sd">            Examples:</span>
-<span class="sd">            -------</span>
-<span class="sd">            &gt;&gt;&gt; foo = &quot;foo&quot;</span>
+<span class="sd">                &gt;&gt;&gt; foo = &quot;foo&quot;</span>
 
-<span class="sd">            &gt;&gt;&gt; value = DataUtil.decode(foo, &quot;foo&quot;, &quot;F&quot;, &quot;X&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; print(value)    # =&gt; &quot;F&quot;</span>
+<span class="sd">                &gt;&gt;&gt; value = DataUtil.decode(foo, &quot;foo&quot;, &quot;F&quot;, &quot;X&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; print(value)    # =&gt; &quot;F&quot;</span>
 
-<span class="sd">            &gt;&gt;&gt; value = DataUtil.decode(foo, &quot;Xoo&quot;, &quot;X&quot;, &quot;foo&quot;, &quot;F&quot;, &quot;Zoo&quot;, &quot;Z&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; print(value)    # =&gt; &quot;F&quot;</span>
+<span class="sd">                &gt;&gt;&gt; value = DataUtil.decode(foo, &quot;Xoo&quot;, &quot;X&quot;, &quot;foo&quot;, &quot;F&quot;, &quot;Zoo&quot;, &quot;Z&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; print(value)    # =&gt; &quot;F&quot;</span>
 
 <span class="sd">            </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -318,10 +334,8 @@
 <span class="sd">            Returns boolean value from the given value.</span>
 <span class="sd">            If value is empty, returns &#39;default&#39;.</span>
 
-<span class="sd">            </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">            Author:</span>
+<span class="sd">                uxl21</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -567,9 +581,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Starts to run timer.</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -------</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span></div>
@@ -579,9 +593,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Marks the lap time.</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -------</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span></div>
@@ -591,9 +605,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Stops the timer/</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -------</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">__stopTimeMs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span></div>
@@ -603,9 +617,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Returns the total elapsed time as milliseconds.</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -----</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -----</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__stopTimeMs</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span></div>
@@ -615,9 +629,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Returns the count of the marked lap time.</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -------</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="p">)</span></div>
@@ -627,9 +641,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Returns the lap time for the specified order(index).</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -------</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__lapTimes</span><span class="p">):</span>
@@ -642,9 +656,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Returns the label.</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -------</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__label</span></div>
@@ -654,9 +668,9 @@
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                Resets all lap times and elapsed time to zero.</span>
 <span class="sd">                </span>
-<span class="sd">            Author</span>
-<span class="sd">            -------</span>
-<span class="sd">            uxl21</span>
+<span class="sd">                Author</span>
+<span class="sd">                -------</span>
+<span class="sd">                uxl21</span>
 <span class="sd">            &quot;&quot;&quot;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">__startTimeMs</span> <span class="o">=</span> <span class="mi">0</span>

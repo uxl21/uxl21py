@@ -37,10 +37,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">uxl21pyutil module</a><ul>
-<li><a class="reference internal" href="#author">Author</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">uxl21pyutil module</a></li>
 </ul>
 </div>
         </div>
@@ -69,22 +66,33 @@
              
   <section id="module-uxl21pyutil">
 <span id="uxl21pyutil-module"></span><h1>uxl21pyutil module<a class="headerlink" href="#module-uxl21pyutil" title="Permalink to this headline"></a></h1>
-<p>Copyright (c) 2021 uxl21 &lt;<a class="reference external" href="mailto:uxl21x&#37;&#52;&#48;gmail&#46;com">uxl21x<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
-This file is a part of uxl21py</p>
-<section id="author">
-<h2>Author<a class="headerlink" href="#author" title="Permalink to this headline"></a></h2>
-<p>uxl21</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="uxl21pyutil.DataUtil">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">uxl21pyutil.</span></span><span class="sig-name descname"><span class="pre">DataUtil</span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Utility class for general data process.</p>
-<p>uxl21</p>
+<p>This utility class supports the features relating to the general data process.</p>
+<dl class="simple">
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DataUtil.decode">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil.decode" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil.decode" title="Permalink to this definition"></a></dt>
 <dd><p>‘decode()’ function just like Oracle DECODE()</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span> <span class="o">=</span> <span class="s2">&quot;foo&quot;</span>
+<dl>
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>value<span class="classifier">any</span></dt><dd><p>Value to check</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>args</dt><dd><p>Values to be compared with the first value and be returned</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>any</dt><dd><p>The corresponding value among the given arguments.</p>
+</dd>
+</dl>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span> <span class="o">=</span> <span class="s2">&quot;foo&quot;</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">DataUtil</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
@@ -95,14 +103,34 @@ This file is a part of uxl21py</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>    <span class="c1"># =&gt; &quot;F&quot;</span>
 </pre></div>
 </div>
-<p>uxl21</p>
+</dd>
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DataUtil.ifelse">
 <em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">ifelse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trueValue</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">falseValue</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil.ifelse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil.ifelse" title="Permalink to this definition"></a></dt>
 <dd><p>Returns ‘trueValue’ if the given condition is True, ‘falseValue’ otherwise.</p>
-<p>uxl21</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>condition<span class="classifier">bool</span></dt><dd><p>Condition to check</p>
+</dd>
+<dt>trueValue<span class="classifier">any</span></dt><dd><p>Condition is true, returns this value</p>
+</dd>
+<dt>falseValue<span class="classifier">any</span></dt><dd><p>Condition is false, returns this value</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>any</dt><dd><p>The corresponding value</p>
+</dd>
+</dl>
+</dd>
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -118,15 +146,33 @@ false otherwise.</p>
 <em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">isEmpty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil.isEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil.isEmpty" title="Permalink to this definition"></a></dt>
 <dd><p>Returns true if the value is null or empty string, zero-length array,
 false otherwise.</p>
-<p>uxl21</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>value<span class="classifier">any</span></dt><dd><p>The value to check</p>
+</dd>
+<dt>trim<span class="classifier">bool</span></dt><dd><p>Whether trim the value before check. The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>bool</dt><dd><p>Whether the value is null or empty such as an empty string and zero-length array, etc.</p>
+</dd>
+</dl>
+</dd>
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DataUtil.isNotEmpty">
 <em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">isNotEmpty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil.isNotEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil.isNotEmpty" title="Permalink to this definition"></a></dt>
-<dd><p>Returns true if the value is not null and has value,
+<dd><p>Returns true if the value is not null and has value, 
 false otherwise.</p>
-<p>uxl21</p>
+<dl class="simple">
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -134,7 +180,10 @@ false otherwise.</p>
 <em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">nvl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaultValue</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil.nvl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil.nvl" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the default value if the value is empty(DataUtil.isEmpty(value) is true),
 original value otherwise.</p>
-<p>uxl21</p>
+<dl class="simple">
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -142,7 +191,10 @@ original value otherwise.</p>
 <em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">toBoolean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DataUtil.toBoolean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DataUtil.toBoolean" title="Permalink to this definition"></a></dt>
 <dd><p>Returns boolean value from the given value.
 If value is empty, returns ‘default’.</p>
-<p>uxl21</p>
+<dl class="simple">
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -162,72 +214,56 @@ If value is empty, returns ‘default’.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.elapsed">
 <span class="sig-name descname"><span class="pre">elapsed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.elapsed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.elapsed" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Returns the total elapsed time as milliseconds.</p>
-</div></blockquote>
+<dd><p>Returns the total elapsed time as milliseconds.</p>
 <p>uxl21</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.getLabel">
 <span class="sig-name descname"><span class="pre">getLabel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.getLabel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.getLabel" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Returns the label.</p>
-</div></blockquote>
+<dd><p>Returns the label.</p>
 <p>uxl21</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.lap">
 <span class="sig-name descname"><span class="pre">lap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.lap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.lap" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Marks the lap time.</p>
-</div></blockquote>
+<dd><p>Marks the lap time.</p>
 <p>uxl21</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.lapCount">
 <span class="sig-name descname"><span class="pre">lapCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.lapCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.lapCount" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Returns the count of the marked lap time.</p>
-</div></blockquote>
+<dd><p>Returns the count of the marked lap time.</p>
 <p>uxl21</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.lapTime">
 <span class="sig-name descname"><span class="pre">lapTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.lapTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.lapTime" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Returns the lap time for the specified order(index).</p>
-</div></blockquote>
+<dd><p>Returns the lap time for the specified order(index).</p>
 <p>uxl21</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.reset" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Resets all lap times and elapsed time to zero.</p>
-</div></blockquote>
+<dd><p>Resets all lap times and elapsed time to zero.</p>
 <p>uxl21</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.start">
 <span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.start" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Starts to run timer.</p>
-</div></blockquote>
+<dd><p>Starts to run timer.</p>
 <p>uxl21</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.DatetimeUtil.StopWatch.stop">
 <span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#DatetimeUtil.StopWatch.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.DatetimeUtil.StopWatch.stop" title="Permalink to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Stops the timer/</p>
-</div></blockquote>
+<dd><p>Stops the timer/</p>
 <p>uxl21</p>
 </dd></dl>
 
@@ -335,25 +371,31 @@ false otherwise.</p>
 <dt class="sig sig-object py" id="uxl21pyutil.ListUtil">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">uxl21pyutil.</span></span><span class="sig-name descname"><span class="pre">ListUtil</span></span><a class="reference internal" href="_modules/uxl21pyutil.html#ListUtil"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.ListUtil" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Utility class for list(array).</p>
-<p>uxl21</p>
+<p>This utility class supports the features relating to list and array.</p>
+<dl class="simple">
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.ListUtil.filterList">
 <em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">filterList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filterValue</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#ListUtil.filterList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.ListUtil.filterList" title="Permalink to this definition"></a></dt>
 <dd><p>Filters list items with their property name and value.</p>
-<dl class="simple">
-<dt>list: list</dt><dd><p>Original data list</p>
+<dl>
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>list<span class="classifier">list</span></dt><dd><p>Original data list</p>
 </dd>
-<dt>prop: str</dt><dd><p>Property name of the item to filter</p>
+<dt>prop<span class="classifier">str</span></dt><dd><p>Property name of the item to filter</p>
 </dd>
-<dt>filterValue: Any</dt><dd><p>Property’s value of the item to filter</p>
+<dt>filterValue<span class="classifier">Any</span></dt><dd><p>Property’s value of the item to filter</p>
 </dd>
 </dl>
-<dl class="simple">
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
 <dt>list</dt><dd><p>Contains filtered items</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; list = [
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; list = [
 &gt;&gt;&gt;    { &quot;code&quot;: &quot;A01&quot;, &quot;type&quot;: &quot;api&quot; },
 &gt;&gt;&gt;    { &quot;code&quot;: &quot;B11&quot;, &quot;type&quot;: &quot;pos&quot; },
 &gt;&gt;&gt;    { &quot;code&quot;: &quot;B12&quot;, &quot;type&quot;: &quot;pos&quot; },
@@ -371,24 +413,32 @@ false otherwise.</p>
 &gt;&gt;&gt; ```
 </pre></div>
 </div>
-<p>uxl21</p>
+</dd>
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="uxl21pyutil.ListUtil.getMax">
 <em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">getMax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="reference internal" href="_modules/uxl21pyutil.html#ListUtil.getMax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uxl21pyutil.ListUtil.getMax" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the greatest value among array’s item with its property name.</p>
+<dd><p>Returns the greatest value among items of the array corresponding to its property name.</p>
 <dl class="simple">
-<dt>list: list</dt><dd><p>List to calculate max value</p>
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>list<span class="classifier">list</span></dt><dd><p>List to calculate max value</p>
 </dd>
-<dt>prop: any</dt><dd><p>Item’s property name</p>
+<dt>prop<span class="classifier">any</span></dt><dd><p>Item’s property name</p>
 </dd>
 </dl>
-<dl class="simple">
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
 <dt>any</dt><dd><p>The maximum value</p>
 </dd>
 </dl>
-<p>uxl21</p>
+</dd>
+<dt>Author:</dt><dd><p>uxl21</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -479,7 +529,6 @@ false otherwise.</p>
 
 </dd></dl>
 
-</section>
 </section>
 
 
