@@ -1,12 +1,10 @@
-"""
-    Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
-    This file is a part of uxl21py
+##################################################
+#   Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
+#   This file is a part of uxl21py
+# 
+#   Author: uxl21
+##################################################
 
-    
-    Author
-    -----
-    uxl21
-"""
 import os
 from PIL.Image import Image
 import barcode

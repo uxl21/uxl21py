@@ -1,12 +1,9 @@
-"""
-    Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
-    This file is a part of uxl21py
-
-    
-    Author
-    -------
-    uxl21
-"""
+##################################################
+#   Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
+#   This file is a part of uxl21py
+# 
+#   Author: uxl21
+##################################################
 
 import numpy
 import time
@@ -20,11 +17,10 @@ from pandas.core.series import Series
 
 class ListUtil:
     """
-        Utility class for list(array).
+        This utility class supports the features relating to list and array.
 
-        Author
-        -------
-        uxl21
+        Author:
+            uxl21
     """ 
 
     @staticmethod
@@ -32,43 +28,40 @@ class ListUtil:
         """
             Filters list items with their property name and value.
 
-            Parameters
-            -------
-            list: list
-                Original data list
-            prop: str
-                Property name of the item to filter
-            filterValue: Any
-                Property's value of the item to filter
+            Parameters:
+                list : list
+                    Original data list
+                prop : str
+                    Property name of the item to filter
+                filterValue : Any
+                    Property's value of the item to filter
 
-            Returns
-            -------
-            list
-                Contains filtered items
+            Returns:
+                list
+                    Contains filtered items
 
-            Examples
-            -------
-            >>> list = [
-            >>>    { "code": "A01", "type": "api" },
-            >>>    { "code": "B11", "type": "pos" },
-            >>>    { "code": "B12", "type": "pos" },
-            >>>    { "code": "C07", "type": "backoffice" },
-            >>>    { "code": "D08", "type": "api" },
-            >>>    { "code": "S21", "type": "backoffice" }
-            >>> ]
-            >>> filteredList = ListUtil.filterList(list, "type", "api")
-            >>> print(filteredList)
-            >>> ```
-            >>> [
-            >>>     { "code": "A01", "type": "api" },
-            >>>     { "code": "D08", "type": "api" }
-            >>> ]
-            >>> ```
+            Examples:
+                >>> list = [
+                >>>    { "code": "A01", "type": "api" },
+                >>>    { "code": "B11", "type": "pos" },
+                >>>    { "code": "B12", "type": "pos" },
+                >>>    { "code": "C07", "type": "backoffice" },
+                >>>    { "code": "D08", "type": "api" },
+                >>>    { "code": "S21", "type": "backoffice" }
+                >>> ]
+                >>> filteredList = ListUtil.filterList(list, "type", "api")
+                >>> print(filteredList)
+                >>> ```
+                >>> [
+                >>>     { "code": "A01", "type": "api" },
+                >>>     { "code": "D08", "type": "api" }
+                >>> ]
+                >>> ```
 
-            Author
-            -------
-            uxl21
+            Author:
+                uxl21
         """
+
         numpy.array
         return [item for item in list if item[prop] != filterValue]
 
@@ -76,23 +69,20 @@ class ListUtil:
     @staticmethod
     def getMax(list:list, prop:any) -> any:
         """
-            Returns the greatest value among array's item with its property name.
+            Returns the greatest value among items of the array corresponding to its property name.
 
-            Parameters
-            -------
-            list: list
-                List to calculate max value
-            prop: any
-                Item's property name
+            Parameters:
+                list : list
+                    List to calculate max value
+                prop : any
+                    Item's property name
 
-            Returns
-            -------
-            any
-                The maximum value
+            Returns:
+                any
+                    The maximum value
 
-            Author
-            -------
-            uxl21
+            Author:
+                uxl21
         """
 
         values = [item[prop] for item in list]
@@ -106,11 +96,10 @@ class ListUtil:
 
 class DataUtil:
     """
-        Utility class for general data process.
+        This utility class supports the features relating to the general data process.
         
-        Author
-        -----
-        uxl21
+        Author:
+            uxl21
     """
 
     @staticmethod
@@ -118,10 +107,19 @@ class DataUtil:
         """
             Returns true if the value is null or empty string, zero-length array,
             false otherwise.
+
+            Parameters:
+                value : any
+                    The value to check
+                trim : bool
+                    Whether trim the value before check. The default is False.
+
+            Returns:
+                bool
+                    Whether the value is null or empty such as an empty string and zero-length array, etc.
             
-            Author
-            -----
-            uxl21
+            Author:
+                uxl21
         """
 
         # check None
@@ -145,12 +143,11 @@ class DataUtil:
     @staticmethod
     def isNotEmpty(value:any) -> bool:
         """
-            Returns true if the value is not null and has value,
+            Returns true if the value is not null and has value, 
             false otherwise.
             
-            Author
-            -----
-            uxl21
+            Author:
+                uxl21
         """
 
         return not DataUtil.isEmpty(value)
@@ -180,9 +177,8 @@ class DataUtil:
             Returns the default value if the value is empty(DataUtil.isEmpty(value) is true),
             original value otherwise.
             
-            Author
-            -----
-            uxl21
+            Author:
+                uxl21
         """
 
         if DataUtil.isEmpty(value):
@@ -196,33 +192,53 @@ class DataUtil:
         """
             Returns 'trueValue' if the given condition is True, 'falseValue' otherwise.
             
-            Author
-            -----
-            uxl21
+            Parameters:
+                condition : bool
+                    Condition to check
+                trueValue : any
+                    Condition is true, returns this value
+                falseValue : any
+                    Condition is false, returns this value
+
+            Returns:
+                any
+                    The corresponding value
+
+            Author:
+                uxl21
         """
 
         return trueValue if condition else falseValue
 
 
     @staticmethod
-    def decode(value, *args) -> any:
+    def decode(value:any, *args) -> any:
         """
             'decode()' function just like Oracle DECODE()
+            
+            Parameters:
+                value : any
+                    Value to check                
+
+                *args
+                    Values to be compared with the first value and be returned
+
+            Returns:
+                any
+                    The corresponding value among the given arguments.
 
             Examples:
-            -------
-            >>> foo = "foo"
+                >>> foo = "foo"
 
-            >>> value = DataUtil.decode(foo, "foo", "F", "X")
-            >>> print(value)    # => "F"
+                >>> value = DataUtil.decode(foo, "foo", "F", "X")
+                >>> print(value)    # => "F"
 
-            >>> value = DataUtil.decode(foo, "Xoo", "X", "foo", "F", "Zoo", "Z")
-            >>> print(value)    # => "F"
+                >>> value = DataUtil.decode(foo, "Xoo", "X", "foo", "F", "Zoo", "Z")
+                >>> print(value)    # => "F"
 
             
-            Author
-            -------
-            uxl21
+            Author:
+                uxl21
         """
 
         length = len(args)
@@ -255,10 +271,8 @@ class DataUtil:
             Returns boolean value from the given value.
             If value is empty, returns 'default'.
 
-            
-            Author
-            -------
-            uxl21
+            Author:
+                uxl21
         """
 
         if DataUtil.isEmpty(value):
@@ -504,9 +518,9 @@ class DatetimeUtil:
             """
                 Starts to run timer.
                 
-            Author
-            -------
-            uxl21
+                Author
+                -------
+                uxl21
             """
 
             self.__startTimeMs = int(time.time() * 1000)
@@ -516,9 +530,9 @@ class DatetimeUtil:
             """
                 Marks the lap time.
                 
-            Author
-            -------
-            uxl21
+                Author
+                -------
+                uxl21
             """
 
             self.__lapTimes.append(int(time.time() * 1000))
@@ -528,9 +542,9 @@ class DatetimeUtil:
             """
                 Stops the timer/
                 
-            Author
-            -------
-            uxl21
+                Author
+                -------
+                uxl21
             """
 
             self.__stopTimeMs = int(time.time() * 1000)
@@ -540,9 +554,9 @@ class DatetimeUtil:
             """
                 Returns the total elapsed time as milliseconds.
                 
-            Author
-            -----
-            uxl21
+                Author
+                -----
+                uxl21
             """
 
             return self.__stopTimeMs - self.__startTimeMs
@@ -552,9 +566,9 @@ class DatetimeUtil:
             """
                 Returns the count of the marked lap time.
                 
-            Author
-            -------
-            uxl21
+                Author
+                -------
+                uxl21
             """
 
             return len(self.__lapTimes)
@@ -564,9 +578,9 @@ class DatetimeUtil:
             """
                 Returns the lap time for the specified order(index).
                 
-            Author
-            -------
-            uxl21
+                Author
+                -------
+                uxl21
             """
 
             if index >= len(self.__lapTimes):
@@ -579,9 +593,9 @@ class DatetimeUtil:
             """
                 Returns the label.
                 
-            Author
-            -------
-            uxl21
+                Author
+                -------
+                uxl21
             """
 
             return self.__label
@@ -591,9 +605,9 @@ class DatetimeUtil:
             """
                 Resets all lap times and elapsed time to zero.
                 
-            Author
-            -------
-            uxl21
+                Author
+                -------
+                uxl21
             """
 
             self.__startTimeMs = 0
