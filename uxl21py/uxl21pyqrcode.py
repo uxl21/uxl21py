@@ -2,6 +2,7 @@
     Copyright (c) 2021 uxl21 <uxl21x@gmail.com>
     This file is a part of uxl21py
 
+    uxl21pyqrcode.py
     
     Author
     -----
@@ -114,7 +115,7 @@ class QRCodeImageGenerator:
             -------
             uxl21
         """
-        
+
         self.version = DictUtil.getInteger(kargs, "version", QRCodeImageConstants.QRCODE_DEFAULT_VERSION)
         self.errorCorrection = DictUtil.getInteger(kargs, "errorCorrection", QRCodeImageConstants.QRCODE_ERROR_CORRECT_M)
         self.boxSize = DictUtil.getInteger(kargs, "boxSize", QRCodeImageConstants.QRCODE_DEFAULT_BOX_SIZE)
