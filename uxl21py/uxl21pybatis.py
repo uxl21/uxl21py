@@ -44,7 +44,7 @@ class PySQLMapper(metaclass=ABCMeta):
 
 
 
-class PySQLMapException(Exception):
+class PyBatisException(Exception):
     """
         The exception class for PyBatis
 
@@ -82,7 +82,7 @@ class PybatisSQLMapper(PySQLMapper):
         self.__namespace = self.__xmldoc.getElementsByTagName("mapper")[0].getAttribute("namespace")
 
         if self.__namespace == None or len(str(self.__namespace).strip()) == 0:
-            raise PySQLMapException("Mapper XML has to be specified the namespace attribute")
+            raise PyBatisException("Mapper XML has to be specified the namespace attribute")
 
         for tag in self.__QUERY_TYPES:
             elementlist = self.__xmldoc.getElementsByTagName(tag)
@@ -95,7 +95,7 @@ class PybatisSQLMapper(PySQLMapper):
                     queryId = self.__namespace + "." + element.getAttribute("id")
 
                     if queryId in self.__mapper:
-                        raise PySQLMapException("SQL '{0}' is duplicated in mapper '{1}'".format(queryId, self.__xmlPath))
+                        raise PyBatisException("SQL '{0}' is duplicated in mapper '{1}'".format(queryId, self.__xmlPath))
                     else:
                         self.__mapper[queryId] = element
 
@@ -174,7 +174,7 @@ class PybatisSQLMapper(PySQLMapper):
         """
 
         if id not in self.__mapper:
-            raise PySQLMapException("SQL '{0}' is not found in mapper '{1}'".format(id, self.__xmlPath))
+            raise PyBatisException("SQL '{0}' is not found in mapper '{1}'".format(id, self.__xmlPath))
 
         queryString = self.__getQueryContent(self.__mapper[id], parameter)
     
@@ -338,9 +338,11 @@ class OracleClientSession(PySQLClientSession):
             count = cursor.rowcount
 
         except Error as err:
-            print(err)
+            #print(err)
             self.__connection.rollback()
             count = -1
+
+            raise PyBatisException(err)
 
         finally:
             cursor.close()
@@ -451,9 +453,11 @@ class SQLite3ClientSession(PySQLClientSession):
             count = cursor.rowcount
 
         except Error as err:
-            print(err)
+            #print(err)
             self.__connection.rollback()
             count = -1
+
+            raise PyBatisException(err)
 
         finally:
             cursor.close()
@@ -559,9 +563,11 @@ class MySQLClientSession(PySQLClientSession):
             count = cursor.rowcount
 
         except Error as err:
-            print(err)
+            #print(err)
             self.__connection.rollback()
             count = -1
+
+            raise PyBatisException(err)
 
         finally:
             cursor.close()
