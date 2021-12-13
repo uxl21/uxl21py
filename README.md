@@ -1,5 +1,5 @@
 # UXL21 Python Utility Project
-  This utility is based on Python 3.8.x
+  This project is based on Python 3.8.x
 
 
 ## Main function list
