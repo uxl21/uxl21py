@@ -1,0 +1,8 @@
+{
+    "url": "218.152.158.146",
+    "port": "6837",
+    "sid": "ORCLCDB",
+    "user": "SFBO",
+    "password": "sfbo",
+    "oracle_client_path": "C:\\app\\sklee21\\product\\12.2.0\\client_3"
+}

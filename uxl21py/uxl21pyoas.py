@@ -18,7 +18,7 @@ import yaml
 
 from PyQt5.uic.properties import QtGui
 
-import qtmodern.styles
+import qtmodern.styles      # pip install qtmodern
 import qtmodern.windows
 import qdarkstyle
 
@@ -81,7 +81,7 @@ class OASConfig():
     #
     def __loadConfigs(self) -> None:
         # fixed config file
-        configFile = open("./resources/oas_config.json", "r")
+        configFile = open("./uxl21py/resources/configs/oas_config.json", "r")
 
         # read
         jsonStr = configFile.read()
@@ -301,7 +301,7 @@ class OASSQLite3DataService(OASDataService):
     # search schema's property list
     #
     def getSchemaPropList(self, parameter) -> List[Dict]:
-        return self.sqlClient.selectList("OAS.selectSchemaPropList", parameter)
+        return self.sqlClient.selectList("SQLGEN.")
 
 
     #

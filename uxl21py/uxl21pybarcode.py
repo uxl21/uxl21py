@@ -12,10 +12,10 @@
 
 import os
 from PIL.Image import Image
-import barcode
+import barcode                          # pip install python-barcode
 from barcode.writer import ImageWriter
-from pyzbar import pyzbar
-import cv2
+from pyzbar import pyzbar               # pip install pyzbar
+import cv2                              # pip install opencv-python
 
 
 class BarcodeFormat:

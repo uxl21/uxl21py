@@ -10,6 +10,10 @@
 """
 
 
+import json
+from typing import Any
+
+
 class Stack:
     """
         This class represents the stack data structure.
@@ -137,3 +141,50 @@ class Stack:
         """
 
         return item in self.__list
+
+
+
+
+
+class JSONConfigData():
+    """
+        The configuration utility class that loads and uses JSON data.
+
+        Author
+        -------
+        uxl21
+    """
+
+
+    #
+    # constructor
+    #
+    def __init__(self, jsonPath:str) -> None:
+        configFile = open(jsonPath, "r")
+
+        # read
+        jsonStr = configFile.read()
+        
+        # load
+        self.__configData = json.loads(jsonStr)
+
+        configFile.close()
+
+
+    def getConfig(self, configName:str) -> Any:
+        """
+            Returns config value of the specified name.
+
+            Parameters:
+                list : list
+                    Original data list
+                
+            Returns:
+                Any
+                    Config value
+
+            Author:
+                uxl21
+        """
+        
+        return self.__configData[configName]

@@ -1,0 +1,15 @@
+{
+    "dbfile_path": "./uxl21py/resources/db/OAS.db",
+    "sqlmapper_path": "./uxl21py/resources/mappers/oas_sql.xml",
+
+    "ui_main_path": "./uxl21py/resources/gui/oas_ui_main.ui",
+    "ui_list_path": "./uxl21py/resources/gui/oas_ui_list.ui",
+    "ui_header_path": "./uxl21py/resources/gui/oas_ui_header.ui",
+    "ui_paths_path": "./uxl21py/resources/gui/oas_ui_paths.ui",
+    "ui_schemas_path": "./uxl21py/resources/gui/oas_ui_schemas.ui",
+
+    "export_type": "redoc",
+
+    "redoc_template": "./uxl21py/resources/templates/redoc.html.template",
+    "swagger_template": "./uxl21py/resources/templates/swagger.html.template"
+}

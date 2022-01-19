@@ -13,9 +13,9 @@ from sqlite3.dbapi2 import Error
 from xml.dom import Node, minidom
 
 import re
-import cx_Oracle
+import cx_Oracle    # pip install cx_Oracle
 import sqlite3
-import pymysql
+import pymysql      # pip install PyMySQL
 
 
 #
@@ -233,7 +233,7 @@ class PySQLClientSession(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def selectlist(self, queryId:str, parameter:dict) -> list: ...
+    def selectList(self, queryId:str, parameter:dict) -> list: ...
 
     @abstractmethod
     def selectOne(self, queryId:str, parameter:dict=None) -> any: ...
@@ -279,7 +279,7 @@ class OracleClientSession(PySQLClientSession):
     #
     # implemented
     #
-    def selectlist(self, queryId:str, parameter:dict=None) -> list:
+    def selectList(self, queryId:str, parameter:dict=None) -> list:
         queryString = self.__sqlMapper.getQuery(queryId, parameter)
 
         cursor = self.__connection.cursor()
@@ -393,7 +393,7 @@ class SQLite3ClientSession(PySQLClientSession):
     #
     # implemented
     #
-    def selectlist(self, queryId:str, parameter:dict=None) -> list:
+    def selectList(self, queryId:str, parameter:dict=None) -> list:
         queryString = self.__sqlMapper.getQuery(queryId, parameter)
 
         cursor = self.__connection.cursor()
@@ -506,7 +506,7 @@ class MySQLClientSession(PySQLClientSession):
     #
     # implemented
     #
-    def selectlist(self, queryId:str, parameter:dict=None) -> list:
+    def selectList(self, queryId:str, parameter:dict=None) -> list:
         queryString = self.__sqlMapper.getQuery(queryId, parameter)
 
         cursor = self.__connection.cursor()

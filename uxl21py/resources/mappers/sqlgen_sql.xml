@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SQLGEN">
+
+    <!-- select user list -->
+    <select id="selectUserlist" resultType="map">
+        SELECT USERNAME
+            , CASE WHEN USERNAME = USER THEN 'Y' ELSE '' END AS DEFAULT_USER
+          FROM ALL_USERS
+        ORDER BY USER_ID
+    </select>
+
+</mapper>

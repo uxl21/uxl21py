@@ -11,9 +11,9 @@
 from base64 import encode
 from sys import setcheckinterval, version
 
-from qrcode import constants
+from qrcode import constants                    # pip install qrcode
 from uxl21pyutil import DataUtil, DictUtil
-import pyqrcode
+import pyqrcode                                 # pip install pyqrcode
 from qrcode.main import QRCode
 import cv2
 
